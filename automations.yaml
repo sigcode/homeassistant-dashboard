@@ -4,7 +4,12 @@
   trigger:
     - platform: time
       at: "07:00:00"
-  condition: []
+    - platform: homeassistant
+      event: start
+  condition:
+    - condition: time
+      after: "07:00:00"
+      before: "22:00:00"
   action:
     - service: climate.set_temperature
       target:
@@ -18,7 +23,15 @@
   trigger:
     - platform: time
       at: "22:00:00"
-  condition: []
+    - platform: homeassistant
+      event: start
+  condition:
+    - condition: or
+      conditions:
+        - condition: time
+          after: "22:00:00"
+        - condition: time
+          before: "07:00:00"
   action:
     - service: climate.set_temperature
       target:
@@ -32,7 +45,12 @@
   trigger:
     - platform: time
       at: "07:00:00"
-  condition: []
+    - platform: homeassistant
+      event: start
+  condition:
+    - condition: time
+      after: "07:00:00"
+      before: "22:00:00"
   action:
     - service: climate.set_temperature
       target:
@@ -46,7 +64,15 @@
   trigger:
     - platform: time
       at: "22:00:00"
-  condition: []
+    - platform: homeassistant
+      event: start
+  condition:
+    - condition: or
+      conditions:
+        - condition: time
+          after: "22:00:00"
+        - condition: time
+          before: "07:00:00"
   action:
     - service: climate.set_temperature
       target:
