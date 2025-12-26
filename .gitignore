@@ -1,0 +1,31 @@
+# Secrets
+secrets.yaml
+.storage/auth
+.storage/auth_provider.homeassistant
+.storage/http.auth
+.storage/onboarding
+
+# Database & logs
+*.db
+*.db-shm
+*.db-wal
+*.log
+*.log.*
+
+# Cache & temp
+__pycache__/
+*.pyc
+.cloud/
+deps/
+tts/
+
+# Large/binary files
+*.zip
+*.tar.gz
+
+# HACS (managed separately)
+custom_components/hacs/
+
+# Backups
+backups/
+*.bak

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace_resources",
+  "data": {
+    "items": [
+      {
+        "id": "simple-thermostat",
+        "type": "module",
+        "url": "/local/community/simple-thermostat.js"
+      },
+      {
+        "id": "button-card",
+        "type": "module",
+        "url": "/local/community/button-card.js"
+      },
+      {
+        "id": "stack-in-card",
+        "type": "module",
+        "url": "/local/community/stack-in-card.js"
+      }
+    ]
+  }
+}
