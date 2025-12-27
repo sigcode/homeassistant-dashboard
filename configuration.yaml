@@ -1,4 +1,3 @@
-
 # Loads default set of integrations. Do not remove.
 default_config:
 
@@ -9,3 +8,15 @@ frontend:
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+
+# Light Groups
+light:
+  - platform: group
+    name: "Büro LEDs"
+    unique_id: buero_leds_group
+    all: false
+    entities:
+      - light.h619a
+      - light.wled_4
+      - light.h6061
+      - light.wled_3
