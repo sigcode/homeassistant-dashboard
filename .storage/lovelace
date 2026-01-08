@@ -643,7 +643,7 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_buro_nachtmodus",
                       "icon": "mdi:weather-night",
-                      "name": "Nacht · 16°C",
+                      "name": "[[[ return 'Nacht · ' + states['input_number.heizung_buero_nacht_temperatur'].state + '°C' ]]]",
                       "label": "22:00 - 07:00",
                       "show_label": true,
                       "show_state": false,
@@ -1410,7 +1410,7 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_bad_nachtmodus",
                       "icon": "mdi:weather-night",
-                      "name": "Nacht · 16°C",
+                      "name": "[[[ return 'Nacht · ' + states['input_number.heizung_bad_nacht_temperatur'].state + '°C' ]]]",
                       "label": "22:00 - 07:00",
                       "show_label": true,
                       "show_state": false,
@@ -1541,6 +1541,425 @@
                       }
                     }
                   ]
+                }
+              ]
+            },
+            {
+              "type": "custom:stack-in-card",
+              "mode": "vertical",
+              "cards": [
+                {
+                  "type": "markdown",
+                  "content": "### 🌡️ Heizung Zeitplan",
+                  "card_mod": {
+                    "style": "ha-card { background: transparent; box-shadow: none; padding: 8px 0 0 0; }"
+                  }
+                },
+                {
+                  "type": "markdown",
+                  "content": "#### Alle Thermostate",
+                  "card_mod": {
+                    "style": "ha-card { background: transparent; box-shadow: none; padding: 4px 0 0 0; margin-bottom: -8px; }"
+                  }
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "entity": "input_number.heizung_alle_tag_temperatur",
+                      "icon": "mdi:weather-sunny",
+                      "name": "Tag (alle)",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "rgba(255,167,38,0.2)"
+                          },
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "12px"
+                          },
+                          {
+                            "border": "1px solid rgba(255,167,38,0.4)"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "35px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "28px"
+                          },
+                          {
+                            "color": "#FFA726"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "20px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          },
+                          {
+                            "color": "#FFA726"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "input_number.heizung_alle_nacht_temperatur",
+                      "icon": "mdi:weather-night",
+                      "name": "Nacht (alle)",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "rgba(66,165,245,0.2)"
+                          },
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "12px"
+                          },
+                          {
+                            "border": "1px solid rgba(66,165,245,0.4)"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "35px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "28px"
+                          },
+                          {
+                            "color": "#42A5F5"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "20px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          },
+                          {
+                            "color": "#42A5F5"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "markdown",
+                  "content": "#### Individuelle Einstellungen",
+                  "card_mod": {
+                    "style": "ha-card { background: transparent; box-shadow: none; padding: 8px 0 0 0; margin-bottom: -8px; }"
+                  }
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "icon": "mdi:desktop-tower-monitor",
+                      "name": "Büro",
+                      "show_state": false,
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "8px"
+                          },
+                          {
+                            "pointer-events": "none"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "20px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "font-weight": "500"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "input_number.heizung_buero_tag_temperatur",
+                      "icon": "mdi:white-balance-sunny",
+                      "show_state": true,
+                      "show_name": false,
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "rgba(255,167,38,0.1)"
+                          },
+                          {
+                            "border-radius": "8px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "18px"
+                          },
+                          {
+                            "color": "#FFA726"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "500"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "input_number.heizung_buero_nacht_temperatur",
+                      "icon": "mdi:moon-waning-crescent",
+                      "show_state": true,
+                      "show_name": false,
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "rgba(66,165,245,0.1)"
+                          },
+                          {
+                            "border-radius": "8px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "18px"
+                          },
+                          {
+                            "color": "#42A5F5"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "500"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "icon": "mdi:shower",
+                      "name": "Bad",
+                      "show_state": false,
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "8px"
+                          },
+                          {
+                            "pointer-events": "none"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "20px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "font-weight": "500"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "input_number.heizung_bad_tag_temperatur",
+                      "icon": "mdi:white-balance-sunny",
+                      "show_state": true,
+                      "show_name": false,
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "rgba(255,167,38,0.1)"
+                          },
+                          {
+                            "border-radius": "8px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "18px"
+                          },
+                          {
+                            "color": "#FFA726"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "500"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "input_number.heizung_bad_nacht_temperatur",
+                      "icon": "mdi:moon-waning-crescent",
+                      "show_state": true,
+                      "show_name": false,
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "rgba(66,165,245,0.1)"
+                          },
+                          {
+                            "border-radius": "8px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "18px"
+                          },
+                          {
+                            "color": "#42A5F5"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "500"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "markdown",
+                  "content": "⏰ **Tag** 07:00 - 22:00 · **Nacht** 22:00 - 07:00",
+                  "card_mod": {
+                    "style": "ha-card { background: transparent; box-shadow: none; padding: 4px 0 0 0; text-align: center; } ha-markdown p { font-size: 11px; color: var(--secondary-text-color); margin: 0; }"
+                  }
                 }
               ]
             },

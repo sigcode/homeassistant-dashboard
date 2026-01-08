@@ -34,7 +34,7 @@
 
 - id: heizung_buero_nacht
   alias: "Heizung Büro - Nachtmodus"
-  description: "Büro auf 16°C ab 22:00"
+  description: "Büro auf eingestellte Nachttemperatur ab 22:00"
   trigger:
     - platform: time
       at: "22:00:00"
@@ -45,6 +45,9 @@
     - platform: time_pattern
       minutes: "/5"
       id: retry_trigger
+    - platform: state
+      entity_id: input_number.heizung_buero_nacht_temperatur
+      id: temp_changed
   condition:
     - condition: or
       conditions:
@@ -64,7 +67,7 @@
       target:
         entity_id: climate.heizung_buro
       data:
-        temperature: 16
+        temperature: "{{ states('input_number.heizung_buero_nacht_temperatur') | float }}"
 
 - id: heizung_bad_tag
   alias: "Heizung Bad - Tagesmodus"
@@ -102,7 +105,7 @@
 
 - id: heizung_bad_nacht
   alias: "Heizung Bad - Nachtmodus"
-  description: "Bad auf 16°C ab 22:00"
+  description: "Bad auf eingestellte Nachttemperatur ab 22:00"
   trigger:
     - platform: time
       at: "22:00:00"
@@ -113,6 +116,9 @@
     - platform: time_pattern
       minutes: "/5"
       id: retry_trigger
+    - platform: state
+      entity_id: input_number.heizung_bad_nacht_temperatur
+      id: temp_changed
   condition:
     - condition: or
       conditions:
@@ -132,4 +138,35 @@
       target:
         entity_id: climate.heizung_bad
       data:
-        temperature: 16
+        temperature: "{{ states('input_number.heizung_bad_nacht_temperatur') | float }}"
+
+# Globale Temperatur-Synchronisation
+- id: heizung_alle_tag_sync
+  alias: "Heizung Alle - Tag Temperatur Sync"
+  description: "Synchronisiert die globale Tagestemperatur auf alle Thermostate"
+  trigger:
+    - platform: state
+      entity_id: input_number.heizung_alle_tag_temperatur
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id:
+          - input_number.heizung_buero_tag_temperatur
+          - input_number.heizung_bad_tag_temperatur
+      data:
+        value: "{{ states('input_number.heizung_alle_tag_temperatur') | float }}"
+
+- id: heizung_alle_nacht_sync
+  alias: "Heizung Alle - Nacht Temperatur Sync"
+  description: "Synchronisiert die globale Nachttemperatur auf alle Thermostate"
+  trigger:
+    - platform: state
+      entity_id: input_number.heizung_alle_nacht_temperatur
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id:
+          - input_number.heizung_buero_nacht_temperatur
+          - input_number.heizung_bad_nacht_temperatur
+      data:
+        value: "{{ states('input_number.heizung_alle_nacht_temperatur') | float }}"

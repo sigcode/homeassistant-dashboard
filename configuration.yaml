@@ -30,22 +30,56 @@ light:
 
 # Heizung Temperatur-Einstellungen
 input_number:
+  # Individuelle Thermostat-Einstellungen
   heizung_buero_tag_temperatur:
     name: "Büro Tagestemperatur"
-    min: 18
+    min: 16
     max: 25
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:thermometer
     initial: 21
+  heizung_buero_nacht_temperatur:
+    name: "Büro Nachttemperatur"
+    min: 14
+    max: 20
+    step: 0.5
+    unit_of_measurement: "°C"
+    icon: mdi:thermometer-low
+    initial: 16
   heizung_bad_tag_temperatur:
     name: "Bad Tagestemperatur"
-    min: 18
+    min: 16
     max: 25
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:thermometer
     initial: 21
+  heizung_bad_nacht_temperatur:
+    name: "Bad Nachttemperatur"
+    min: 14
+    max: 20
+    step: 0.5
+    unit_of_measurement: "°C"
+    icon: mdi:thermometer-low
+    initial: 16
+  # Globale Einstellungen für alle Thermostate
+  heizung_alle_tag_temperatur:
+    name: "Alle Tagestemperatur"
+    min: 16
+    max: 25
+    step: 0.5
+    unit_of_measurement: "°C"
+    icon: mdi:home-thermometer
+    initial: 21
+  heizung_alle_nacht_temperatur:
+    name: "Alle Nachttemperatur"
+    min: 14
+    max: 20
+    step: 0.5
+    unit_of_measurement: "°C"
+    icon: mdi:home-thermometer-outline
+    initial: 16
 
 # Graph Toggle Helfer
 input_boolean:
