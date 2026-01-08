@@ -15,27 +15,488 @@
               "mode": "vertical",
               "cards": [
                 {
-                  "type": "custom:simple-thermostat",
+                  "type": "custom:better-thermostat-ui-card",
                   "entity": "climate.heizung_buro",
                   "name": "Heizung Büro",
-                  "step_size": 0.5,
-                  "hide": {"state": true},
-                  "control": false
+                  "disable_menu": false,
+                  "disable_window": true,
+                  "eco_temperature": 16,
+                  "set_current_as_main": true
                 },
                 {
                   "type": "horizontal-stack",
                   "cards": [
-                    {"type": "custom:button-card", "icon": "mdi:snowflake", "name": "16°", "tap_action": {"action": "call-service", "service": "climate.set_temperature", "service_data": {"entity_id": "climate.heizung_buro", "temperature": 16}}, "styles": {"card": [{"border-radius": "12px"}, {"padding": "8px"}], "icon": [{"color": "var(--primary-color)"}, {"width": "20px"}], "name": [{"font-size": "13px"}, {"margin-top": "4px"}]}},
-                    {"type": "custom:button-card", "icon": "mdi:thermometer-low", "name": "18°", "tap_action": {"action": "call-service", "service": "climate.set_temperature", "service_data": {"entity_id": "climate.heizung_buro", "temperature": 18}}, "styles": {"card": [{"border-radius": "12px"}, {"padding": "8px"}], "icon": [{"color": "var(--primary-color)"}, {"width": "20px"}], "name": [{"font-size": "13px"}, {"margin-top": "4px"}]}},
-                    {"type": "custom:button-card", "icon": "mdi:thermometer", "name": "20°", "tap_action": {"action": "call-service", "service": "climate.set_temperature", "service_data": {"entity_id": "climate.heizung_buro", "temperature": 20}}, "styles": {"card": [{"border-radius": "12px"}, {"padding": "8px"}], "icon": [{"color": "var(--primary-color)"}, {"width": "20px"}], "name": [{"font-size": "13px"}, {"margin-top": "4px"}]}},
-                    {"type": "custom:button-card", "icon": "mdi:thermometer-high", "name": "21°", "tap_action": {"action": "call-service", "service": "climate.set_temperature", "service_data": {"entity_id": "climate.heizung_buro", "temperature": 21}}, "styles": {"card": [{"border-radius": "12px"}, {"padding": "8px"}], "icon": [{"color": "var(--primary-color)"}, {"width": "20px"}], "name": [{"font-size": "13px"}, {"margin-top": "4px"}]}},
-                    {"type": "custom:button-card", "icon": "mdi:fire", "name": "23°", "tap_action": {"action": "call-service", "service": "climate.set_temperature", "service_data": {"entity_id": "climate.heizung_buro", "temperature": 23}}, "styles": {"card": [{"border-radius": "12px"}, {"padding": "8px"}], "icon": [{"color": "var(--primary-color)"}, {"width": "20px"}], "name": [{"font-size": "13px"}, {"margin-top": "4px"}]}}
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.heizung_buro_position",
+                      "icon": "mdi:valve",
+                      "name": "Ventil",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return Math.round(entity.state) + '%' ]]]",
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "4px 8px"
+                          },
+                          {
+                            "height": "50px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "30px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "16px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.heizung_buro_battery",
+                      "icon": "mdi:battery",
+                      "name": "Batterie",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return Math.round(entity.state) + '%' ]]]",
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "4px 8px"
+                          },
+                          {
+                            "height": "50px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "30px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "[[[ if (entity.state > 60) return 'var(--success-color)'; else if (entity.state > 20) return 'var(--warning-color)'; else return 'var(--error-color)'; ]]]"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "16px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "input_boolean.heizung_buero_graph",
+                      "icon": "mdi:chart-line",
+                      "name": "Verlauf",
+                      "show_state": false,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "icon": [
+                              {
+                                "color": "var(--primary-color)"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "var(--primary-color)"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "icon": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "4px 8px"
+                          },
+                          {
+                            "height": "50px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "30px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "16px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "entity": "input_boolean.heizung_buero_graph",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "custom:apexcharts-card",
+                    "graph_span": "24h",
+                    "yaxis": [
+                      {
+                        "id": "left",
+                        "min": 15,
+                        "max": 30,
+                        "decimals": 0
+                      },
+                      {
+                        "id": "right",
+                        "opposite": true,
+                        "min": 0,
+                        "max": 100,
+                        "decimals": 0
+                      }
+                    ],
+                    "series": [
+                      {
+                        "entity": "climate.heizung_buro",
+                        "attribute": "current_temperature",
+                        "name": "Temperatur",
+                        "yaxis_id": "left",
+                        "color": "#FF9800"
+                      },
+                      {
+                        "entity": "sensor.heizung_buro_position",
+                        "name": "Ventil",
+                        "yaxis_id": "right",
+                        "color": "#2196F3"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "icon": "mdi:snowflake",
+                      "name": "16°",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "climate.set_temperature",
+                        "service_data": {
+                          "entity_id": "climate.heizung_buro",
+                          "temperature": 16
+                        }
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "var(--primary-color)"
+                          },
+                          {
+                            "width": "20px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "icon": "mdi:thermometer-low",
+                      "name": "18°",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "climate.set_temperature",
+                        "service_data": {
+                          "entity_id": "climate.heizung_buro",
+                          "temperature": 18
+                        }
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "var(--primary-color)"
+                          },
+                          {
+                            "width": "20px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "icon": "mdi:thermometer",
+                      "name": "20°",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "climate.set_temperature",
+                        "service_data": {
+                          "entity_id": "climate.heizung_buro",
+                          "temperature": 20
+                        }
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "var(--primary-color)"
+                          },
+                          {
+                            "width": "20px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "icon": "mdi:thermometer-high",
+                      "name": "21°",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "climate.set_temperature",
+                        "service_data": {
+                          "entity_id": "climate.heizung_buro",
+                          "temperature": 21
+                        }
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "var(--primary-color)"
+                          },
+                          {
+                            "width": "20px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "icon": "mdi:fire",
+                      "name": "23°",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "climate.set_temperature",
+                        "service_data": {
+                          "entity_id": "climate.heizung_buro",
+                          "temperature": 23
+                        }
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "var(--primary-color)"
+                          },
+                          {
+                            "width": "20px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    }
                   ]
                 },
                 {
                   "type": "markdown",
                   "content": "#### Zeitplan",
-                  "card_mod": {"style": "ha-card { background: transparent; box-shadow: none; padding: 8px 0 0 0; }"}
+                  "card_mod": {
+                    "style": "ha-card { background: transparent; box-shadow: none; padding: 8px 0 0 0; }"
+                  }
                 },
                 {
                   "type": "horizontal-stack",
@@ -44,16 +505,139 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_buro_tagesmodus",
                       "icon": "mdi:weather-sunny",
-                      "name": "Tag · 21°C",
+                      "name": "[[[ return 'Tag · ' + states['input_number.heizung_buero_tag_temperatur'].state + '°C' ]]]",
                       "label": "07:00 - 22:00",
                       "show_label": true,
                       "show_state": false,
-                      "tap_action": {"action": "toggle"},
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "hold_action": {
+                        "action": "more-info",
+                        "entity": "input_number.heizung_buero_tag_temperatur"
+                      },
                       "state": [
-                        {"value": "on", "styles": {"card": [{"padding": "12px"}, {"border-radius": "16px"}, {"background": "rgba(255,167,38,0.25)"}, {"border": "2px solid #FFA726"}, {"box-shadow": "0 0 15px rgba(255,167,38,0.5)"}], "icon": [{"width": "28px"}, {"color": "#FFA726"}], "name": [{"font-size": "14px"}, {"font-weight": "500"}, {"margin-top": "8px"}, {"color": "#FFA726"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "2px"}]}},
-                        {"value": "off", "styles": {"card": [{"padding": "12px"}, {"border-radius": "16px"}, {"opacity": "0.5"}], "icon": [{"width": "28px"}], "name": [{"font-size": "14px"}, {"font-weight": "500"}, {"margin-top": "8px"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "2px"}]}}
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "padding": "12px"
+                              },
+                              {
+                                "border-radius": "16px"
+                              },
+                              {
+                                "background": "rgba(255,167,38,0.25)"
+                              },
+                              {
+                                "border": "2px solid #FFA726"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              },
+                              {
+                                "color": "#FFA726"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "14px"
+                              },
+                              {
+                                "font-weight": "500"
+                              },
+                              {
+                                "margin-top": "8px"
+                              },
+                              {
+                                "color": "#FFA726"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "color": "var(--secondary-text-color)"
+                              },
+                              {
+                                "margin-top": "2px"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "padding": "12px"
+                              },
+                              {
+                                "border-radius": "16px"
+                              },
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "14px"
+                              },
+                              {
+                                "margin-top": "8px"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "margin-top": "2px"
+                              }
+                            ]
+                          }
+                        }
                       ],
-                      "styles": {"card": [{"padding": "12px"}, {"border-radius": "16px"}, {"background": "rgba(255,167,38,0.25)"}, {"border": "2px solid #FFA726"}, {"box-shadow": "0 0 15px rgba(255,167,38,0.5)"}], "icon": [{"width": "28px"}, {"color": "#FFA726"}], "name": [{"font-size": "14px"}, {"font-weight": "500"}, {"margin-top": "8px"}, {"color": "#FFA726"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "2px"}]}
+                      "styles": {
+                        "card": [
+                          {
+                            "padding": "12px"
+                          },
+                          {
+                            "border-radius": "16px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "28px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "margin-top": "2px"
+                          }
+                        ]
+                      }
                     },
                     {
                       "type": "custom:button-card",
@@ -63,12 +647,131 @@
                       "label": "22:00 - 07:00",
                       "show_label": true,
                       "show_state": false,
-                      "tap_action": {"action": "toggle"},
+                      "tap_action": {
+                        "action": "toggle"
+                      },
                       "state": [
-                        {"value": "on", "styles": {"card": [{"padding": "12px"}, {"border-radius": "16px"}, {"background": "rgba(66,165,245,0.25)"}, {"border": "2px solid #42A5F5"}, {"box-shadow": "0 0 15px rgba(66,165,245,0.5)"}], "icon": [{"width": "28px"}, {"color": "#42A5F5"}], "name": [{"font-size": "14px"}, {"font-weight": "500"}, {"margin-top": "8px"}, {"color": "#42A5F5"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "2px"}]}},
-                        {"value": "off", "styles": {"card": [{"padding": "12px"}, {"border-radius": "16px"}, {"opacity": "0.5"}], "icon": [{"width": "28px"}], "name": [{"font-size": "14px"}, {"font-weight": "500"}, {"margin-top": "8px"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "2px"}]}}
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "padding": "12px"
+                              },
+                              {
+                                "border-radius": "16px"
+                              },
+                              {
+                                "background": "rgba(66,165,245,0.25)"
+                              },
+                              {
+                                "border": "2px solid #42A5F5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              },
+                              {
+                                "color": "#42A5F5"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "14px"
+                              },
+                              {
+                                "font-weight": "500"
+                              },
+                              {
+                                "margin-top": "8px"
+                              },
+                              {
+                                "color": "#42A5F5"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "color": "var(--secondary-text-color)"
+                              },
+                              {
+                                "margin-top": "2px"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "padding": "12px"
+                              },
+                              {
+                                "border-radius": "16px"
+                              },
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "14px"
+                              },
+                              {
+                                "margin-top": "8px"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "margin-top": "2px"
+                              }
+                            ]
+                          }
+                        }
                       ],
-                      "styles": {"card": [{"padding": "12px"}, {"border-radius": "16px"}, {"background": "rgba(66,165,245,0.25)"}, {"border": "2px solid #42A5F5"}, {"box-shadow": "0 0 15px rgba(66,165,245,0.5)"}], "icon": [{"width": "28px"}, {"color": "#42A5F5"}], "name": [{"font-size": "14px"}, {"font-weight": "500"}, {"margin-top": "8px"}, {"color": "#42A5F5"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "2px"}]}
+                      "styles": {
+                        "card": [
+                          {
+                            "padding": "12px"
+                          },
+                          {
+                            "border-radius": "16px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "28px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "margin-top": "2px"
+                          }
+                        ]
+                      }
                     }
                   ]
                 }
@@ -79,27 +782,488 @@
               "mode": "vertical",
               "cards": [
                 {
-                  "type": "custom:simple-thermostat",
-                  "entity": "climate.zigbee_intelligentes_temperaturregelventil",
+                  "type": "custom:better-thermostat-ui-card",
+                  "entity": "climate.heizung_bad",
                   "name": "Heizung Bad",
-                  "step_size": 0.5,
-                  "hide": {"state": true},
-                  "control": false
+                  "disable_menu": false,
+                  "disable_window": true,
+                  "eco_temperature": 16,
+                  "set_current_as_main": true
                 },
                 {
                   "type": "horizontal-stack",
                   "cards": [
-                    {"type": "custom:button-card", "icon": "mdi:snowflake", "name": "16°", "tap_action": {"action": "call-service", "service": "climate.set_temperature", "service_data": {"entity_id": "climate.zigbee_intelligentes_temperaturregelventil", "temperature": 16}}, "styles": {"card": [{"border-radius": "12px"}, {"padding": "8px"}], "icon": [{"color": "var(--primary-color)"}, {"width": "20px"}], "name": [{"font-size": "13px"}, {"margin-top": "4px"}]}},
-                    {"type": "custom:button-card", "icon": "mdi:thermometer-low", "name": "18°", "tap_action": {"action": "call-service", "service": "climate.set_temperature", "service_data": {"entity_id": "climate.zigbee_intelligentes_temperaturregelventil", "temperature": 18}}, "styles": {"card": [{"border-radius": "12px"}, {"padding": "8px"}], "icon": [{"color": "var(--primary-color)"}, {"width": "20px"}], "name": [{"font-size": "13px"}, {"margin-top": "4px"}]}},
-                    {"type": "custom:button-card", "icon": "mdi:thermometer", "name": "20°", "tap_action": {"action": "call-service", "service": "climate.set_temperature", "service_data": {"entity_id": "climate.zigbee_intelligentes_temperaturregelventil", "temperature": 20}}, "styles": {"card": [{"border-radius": "12px"}, {"padding": "8px"}], "icon": [{"color": "var(--primary-color)"}, {"width": "20px"}], "name": [{"font-size": "13px"}, {"margin-top": "4px"}]}},
-                    {"type": "custom:button-card", "icon": "mdi:thermometer-high", "name": "21°", "tap_action": {"action": "call-service", "service": "climate.set_temperature", "service_data": {"entity_id": "climate.zigbee_intelligentes_temperaturregelventil", "temperature": 21}}, "styles": {"card": [{"border-radius": "12px"}, {"padding": "8px"}], "icon": [{"color": "var(--primary-color)"}, {"width": "20px"}], "name": [{"font-size": "13px"}, {"margin-top": "4px"}]}},
-                    {"type": "custom:button-card", "icon": "mdi:fire", "name": "23°", "tap_action": {"action": "call-service", "service": "climate.set_temperature", "service_data": {"entity_id": "climate.zigbee_intelligentes_temperaturregelventil", "temperature": 23}}, "styles": {"card": [{"border-radius": "12px"}, {"padding": "8px"}], "icon": [{"color": "var(--primary-color)"}, {"width": "20px"}], "name": [{"font-size": "13px"}, {"margin-top": "4px"}]}}
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.heizung_bad_pi_heating_demand",
+                      "icon": "mdi:valve",
+                      "name": "Ventil",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return Math.round(entity.state) + '%' ]]]",
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "4px 8px"
+                          },
+                          {
+                            "height": "50px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "30px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "16px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "binary_sensor.heizung_bad_battery_low",
+                      "icon": "mdi:battery",
+                      "name": "Batterie",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ if (entity.state === 'off') return 'OK'; if (entity.state === 'on') return 'Niedrig!'; return '—'; ]]]",
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "4px 8px"
+                          },
+                          {
+                            "height": "50px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "30px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "[[[ if (entity.state === 'off') return 'var(--success-color)'; if (entity.state === 'on') return 'var(--error-color)'; return 'var(--secondary-text-color)'; ]]]"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "16px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "input_boolean.heizung_bad_graph",
+                      "icon": "mdi:chart-line",
+                      "name": "Verlauf",
+                      "show_state": false,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "icon": [
+                              {
+                                "color": "var(--primary-color)"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "var(--primary-color)"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "icon": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "4px 8px"
+                          },
+                          {
+                            "height": "50px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "30px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "16px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "entity": "input_boolean.heizung_bad_graph",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "custom:apexcharts-card",
+                    "graph_span": "24h",
+                    "yaxis": [
+                      {
+                        "id": "left",
+                        "min": 15,
+                        "max": 30,
+                        "decimals": 0
+                      },
+                      {
+                        "id": "right",
+                        "opposite": true,
+                        "min": 0,
+                        "max": 100,
+                        "decimals": 0
+                      }
+                    ],
+                    "series": [
+                      {
+                        "entity": "climate.heizung_bad",
+                        "attribute": "current_temperature",
+                        "name": "Temperatur",
+                        "yaxis_id": "left",
+                        "color": "#FF9800"
+                      },
+                      {
+                        "entity": "sensor.heizung_bad_pi_heating_demand",
+                        "name": "Ventil",
+                        "yaxis_id": "right",
+                        "color": "#2196F3"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "icon": "mdi:snowflake",
+                      "name": "16°",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "climate.set_temperature",
+                        "service_data": {
+                          "entity_id": "climate.heizung_bad",
+                          "temperature": 16
+                        }
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "var(--primary-color)"
+                          },
+                          {
+                            "width": "20px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "icon": "mdi:thermometer-low",
+                      "name": "18°",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "climate.set_temperature",
+                        "service_data": {
+                          "entity_id": "climate.heizung_bad",
+                          "temperature": 18
+                        }
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "var(--primary-color)"
+                          },
+                          {
+                            "width": "20px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "icon": "mdi:thermometer",
+                      "name": "20°",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "climate.set_temperature",
+                        "service_data": {
+                          "entity_id": "climate.heizung_bad",
+                          "temperature": 20
+                        }
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "var(--primary-color)"
+                          },
+                          {
+                            "width": "20px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "icon": "mdi:thermometer-high",
+                      "name": "21°",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "climate.set_temperature",
+                        "service_data": {
+                          "entity_id": "climate.heizung_bad",
+                          "temperature": 21
+                        }
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "var(--primary-color)"
+                          },
+                          {
+                            "width": "20px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "icon": "mdi:fire",
+                      "name": "23°",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "climate.set_temperature",
+                        "service_data": {
+                          "entity_id": "climate.heizung_bad",
+                          "temperature": 23
+                        }
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "8px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "color": "var(--primary-color)"
+                          },
+                          {
+                            "width": "20px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    }
                   ]
                 },
                 {
                   "type": "markdown",
                   "content": "#### Zeitplan",
-                  "card_mod": {"style": "ha-card { background: transparent; box-shadow: none; padding: 8px 0 0 0; }"}
+                  "card_mod": {
+                    "style": "ha-card { background: transparent; box-shadow: none; padding: 8px 0 0 0; }"
+                  }
                 },
                 {
                   "type": "horizontal-stack",
@@ -108,16 +1272,139 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_bad_tagesmodus",
                       "icon": "mdi:weather-sunny",
-                      "name": "Tag · 21°C",
+                      "name": "[[[ return 'Tag · ' + states['input_number.heizung_bad_tag_temperatur'].state + '°C' ]]]",
                       "label": "07:00 - 22:00",
                       "show_label": true,
                       "show_state": false,
-                      "tap_action": {"action": "toggle"},
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "hold_action": {
+                        "action": "more-info",
+                        "entity": "input_number.heizung_bad_tag_temperatur"
+                      },
                       "state": [
-                        {"value": "on", "styles": {"card": [{"padding": "12px"}, {"border-radius": "16px"}, {"background": "rgba(255,167,38,0.25)"}, {"border": "2px solid #FFA726"}, {"box-shadow": "0 0 15px rgba(255,167,38,0.5)"}], "icon": [{"width": "28px"}, {"color": "#FFA726"}], "name": [{"font-size": "14px"}, {"font-weight": "500"}, {"margin-top": "8px"}, {"color": "#FFA726"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "2px"}]}},
-                        {"value": "off", "styles": {"card": [{"padding": "12px"}, {"border-radius": "16px"}, {"opacity": "0.5"}], "icon": [{"width": "28px"}], "name": [{"font-size": "14px"}, {"font-weight": "500"}, {"margin-top": "8px"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "2px"}]}}
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "padding": "12px"
+                              },
+                              {
+                                "border-radius": "16px"
+                              },
+                              {
+                                "background": "rgba(255,167,38,0.25)"
+                              },
+                              {
+                                "border": "2px solid #FFA726"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              },
+                              {
+                                "color": "#FFA726"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "14px"
+                              },
+                              {
+                                "font-weight": "500"
+                              },
+                              {
+                                "margin-top": "8px"
+                              },
+                              {
+                                "color": "#FFA726"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "color": "var(--secondary-text-color)"
+                              },
+                              {
+                                "margin-top": "2px"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "padding": "12px"
+                              },
+                              {
+                                "border-radius": "16px"
+                              },
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "14px"
+                              },
+                              {
+                                "margin-top": "8px"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "margin-top": "2px"
+                              }
+                            ]
+                          }
+                        }
                       ],
-                      "styles": {"card": [{"padding": "12px"}, {"border-radius": "16px"}, {"background": "rgba(255,167,38,0.25)"}, {"border": "2px solid #FFA726"}, {"box-shadow": "0 0 15px rgba(255,167,38,0.5)"}], "icon": [{"width": "28px"}, {"color": "#FFA726"}], "name": [{"font-size": "14px"}, {"font-weight": "500"}, {"margin-top": "8px"}, {"color": "#FFA726"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "2px"}]}
+                      "styles": {
+                        "card": [
+                          {
+                            "padding": "12px"
+                          },
+                          {
+                            "border-radius": "16px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "28px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "margin-top": "2px"
+                          }
+                        ]
+                      }
                     },
                     {
                       "type": "custom:button-card",
@@ -127,12 +1414,131 @@
                       "label": "22:00 - 07:00",
                       "show_label": true,
                       "show_state": false,
-                      "tap_action": {"action": "toggle"},
+                      "tap_action": {
+                        "action": "toggle"
+                      },
                       "state": [
-                        {"value": "on", "styles": {"card": [{"padding": "12px"}, {"border-radius": "16px"}, {"background": "rgba(66,165,245,0.25)"}, {"border": "2px solid #42A5F5"}, {"box-shadow": "0 0 15px rgba(66,165,245,0.5)"}], "icon": [{"width": "28px"}, {"color": "#42A5F5"}], "name": [{"font-size": "14px"}, {"font-weight": "500"}, {"margin-top": "8px"}, {"color": "#42A5F5"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "2px"}]}},
-                        {"value": "off", "styles": {"card": [{"padding": "12px"}, {"border-radius": "16px"}, {"opacity": "0.5"}], "icon": [{"width": "28px"}], "name": [{"font-size": "14px"}, {"font-weight": "500"}, {"margin-top": "8px"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "2px"}]}}
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "padding": "12px"
+                              },
+                              {
+                                "border-radius": "16px"
+                              },
+                              {
+                                "background": "rgba(66,165,245,0.25)"
+                              },
+                              {
+                                "border": "2px solid #42A5F5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              },
+                              {
+                                "color": "#42A5F5"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "14px"
+                              },
+                              {
+                                "font-weight": "500"
+                              },
+                              {
+                                "margin-top": "8px"
+                              },
+                              {
+                                "color": "#42A5F5"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "color": "var(--secondary-text-color)"
+                              },
+                              {
+                                "margin-top": "2px"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "padding": "12px"
+                              },
+                              {
+                                "border-radius": "16px"
+                              },
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "14px"
+                              },
+                              {
+                                "margin-top": "8px"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "margin-top": "2px"
+                              }
+                            ]
+                          }
+                        }
                       ],
-                      "styles": {"card": [{"padding": "12px"}, {"border-radius": "16px"}, {"background": "rgba(66,165,245,0.25)"}, {"border": "2px solid #42A5F5"}, {"box-shadow": "0 0 15px rgba(66,165,245,0.5)"}], "icon": [{"width": "28px"}, {"color": "#42A5F5"}], "name": [{"font-size": "14px"}, {"font-weight": "500"}, {"margin-top": "8px"}, {"color": "#42A5F5"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "2px"}]}
+                      "styles": {
+                        "card": [
+                          {
+                            "padding": "12px"
+                          },
+                          {
+                            "border-radius": "16px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "28px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "margin-top": "2px"
+                          }
+                        ]
+                      }
                     }
                   ]
                 }
@@ -142,7 +1548,10 @@
               "type": "custom:stack-in-card",
               "mode": "vertical",
               "cards": [
-                {"type": "markdown", "content": "### Beleuchtung"},
+                {
+                  "type": "markdown",
+                  "content": "### Beleuchtung"
+                },
                 {
                   "type": "vertical-stack",
                   "cards": [
@@ -154,13 +1563,87 @@
                       "label": "TV · Schreibtisch · Wand · Regal",
                       "show_label": true,
                       "show_state": false,
-                      "tap_action": {"action": "toggle"},
-                      "hold_action": {"action": "more-info"},
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "hold_action": {
+                        "action": "more-info"
+                      },
                       "state": [
-                        {"value": "on", "styles": {"card": [{"background": "linear-gradient(135deg, rgba(255,193,7,0.3) 0%, rgba(255,152,0,0.3) 100%)"}, {"border": "2px solid rgba(255,193,7,0.6)"}], "icon": [{"color": "#FFC107"}], "name": [{"color": "#FFC107"}]}},
-                        {"value": "off", "styles": {"card": [{"opacity": "0.6"}]}}
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "linear-gradient(135deg, rgba(255,193,7,0.3) 0%, rgba(255,152,0,0.3) 100%)"
+                              },
+                              {
+                                "border": "2px solid rgba(255,193,7,0.6)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#FFC107"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "#FFC107"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "opacity": "0.6"
+                              }
+                            ]
+                          }
+                        }
                       ],
-                      "styles": {"card": [{"border-radius": "16px"}, {"padding": "16px"}, {"margin-bottom": "12px"}], "icon": [{"width": "36px"}], "name": [{"font-size": "16px"}, {"font-weight": "500"}, {"margin-top": "8px"}], "label": [{"font-size": "11px"}, {"color": "var(--secondary-text-color)"}, {"margin-top": "4px"}]}
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "16px"
+                          },
+                          {
+                            "padding": "16px"
+                          },
+                          {
+                            "margin-bottom": "12px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "36px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "16px"
+                          },
+                          {
+                            "font-weight": "500"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
                     }
                   ]
                 },
@@ -170,29 +1653,393 @@
                     {
                       "type": "vertical-stack",
                       "cards": [
-                        {"type": "custom:button-card", "entity": "light.wled_3", "icon": "mdi:television-ambient-light", "name": "TV LED", "show_state": false, "tap_action": {"action": "toggle"}, "state": [{"value": "on", "styles": {"card": [{"background": "rgba(255,193,7,0.2)"}, {"border": "1px solid rgba(255,193,7,0.5)"}], "icon": [{"color": "#FFC107"}]}}, {"value": "off", "styles": {"card": [{"opacity": "0.6"}]}}], "styles": {"card": [{"border-radius": "12px 12px 0 0"}, {"padding": "12px 8px 8px 8px"}], "icon": [{"width": "28px"}], "name": [{"font-size": "11px"}, {"margin-top": "4px"}]}},
-                        {"type": "custom:button-card", "entity": "light.wled_3", "icon": "mdi:palette", "show_name": false, "tap_action": {"action": "more-info"}, "styles": {"card": [{"border-radius": "0 0 12px 12px"}, {"padding": "6px"}, {"background": "rgba(255,255,255,0.05)"}], "icon": [{"width": "14px"}, {"color": "var(--secondary-text-color)"}]}}
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.wled_3",
+                          "icon": "mdi:television-ambient-light",
+                          "name": "TV LED",
+                          "show_state": false,
+                          "tap_action": {
+                            "action": "toggle"
+                          },
+                          "state": [
+                            {
+                              "value": "on",
+                              "styles": {
+                                "card": [
+                                  {
+                                    "background": "rgba(255,193,7,0.2)"
+                                  },
+                                  {
+                                    "border": "1px solid rgba(255,193,7,0.5)"
+                                  }
+                                ],
+                                "icon": [
+                                  {
+                                    "color": "#FFC107"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "value": "off",
+                              "styles": {
+                                "card": [
+                                  {
+                                    "opacity": "0.6"
+                                  }
+                                ]
+                              }
+                            }
+                          ],
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "12px 12px 0 0"
+                              },
+                              {
+                                "padding": "12px 8px 8px 8px"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "margin-top": "4px"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.wled_3",
+                          "icon": "mdi:palette",
+                          "show_name": false,
+                          "tap_action": {
+                            "action": "more-info"
+                          },
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "0 0 12px 12px"
+                              },
+                              {
+                                "padding": "6px"
+                              },
+                              {
+                                "background": "rgba(255,255,255,0.05)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "14px"
+                              },
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
                       ]
                     },
                     {
                       "type": "vertical-stack",
                       "cards": [
-                        {"type": "custom:button-card", "entity": "light.wled_4", "icon": "mdi:desk-lamp", "name": "Schreibtisch", "show_state": false, "tap_action": {"action": "toggle"}, "state": [{"value": "on", "styles": {"card": [{"background": "rgba(255,193,7,0.2)"}, {"border": "1px solid rgba(255,193,7,0.5)"}], "icon": [{"color": "#FFC107"}]}}, {"value": "off", "styles": {"card": [{"opacity": "0.6"}]}}], "styles": {"card": [{"border-radius": "12px 12px 0 0"}, {"padding": "12px 8px 8px 8px"}], "icon": [{"width": "28px"}], "name": [{"font-size": "11px"}, {"margin-top": "4px"}]}},
-                        {"type": "custom:button-card", "entity": "light.wled_4", "icon": "mdi:palette", "show_name": false, "tap_action": {"action": "more-info"}, "styles": {"card": [{"border-radius": "0 0 12px 12px"}, {"padding": "6px"}, {"background": "rgba(255,255,255,0.05)"}], "icon": [{"width": "14px"}, {"color": "var(--secondary-text-color)"}]}}
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.wled_4",
+                          "icon": "mdi:desk-lamp",
+                          "name": "Schreibtisch",
+                          "show_state": false,
+                          "tap_action": {
+                            "action": "toggle"
+                          },
+                          "state": [
+                            {
+                              "value": "on",
+                              "styles": {
+                                "card": [
+                                  {
+                                    "background": "rgba(255,193,7,0.2)"
+                                  },
+                                  {
+                                    "border": "1px solid rgba(255,193,7,0.5)"
+                                  }
+                                ],
+                                "icon": [
+                                  {
+                                    "color": "#FFC107"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "value": "off",
+                              "styles": {
+                                "card": [
+                                  {
+                                    "opacity": "0.6"
+                                  }
+                                ]
+                              }
+                            }
+                          ],
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "12px 12px 0 0"
+                              },
+                              {
+                                "padding": "12px 8px 8px 8px"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "margin-top": "4px"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.wled_4",
+                          "icon": "mdi:palette",
+                          "show_name": false,
+                          "tap_action": {
+                            "action": "more-info"
+                          },
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "0 0 12px 12px"
+                              },
+                              {
+                                "padding": "6px"
+                              },
+                              {
+                                "background": "rgba(255,255,255,0.05)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "14px"
+                              },
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
                       ]
                     },
                     {
                       "type": "vertical-stack",
                       "cards": [
-                        {"type": "custom:button-card", "entity": "light.h6061", "icon": "mdi:wall-sconce-flat", "name": "Wand", "show_state": false, "tap_action": {"action": "toggle"}, "state": [{"value": "on", "styles": {"card": [{"background": "rgba(255,193,7,0.2)"}, {"border": "1px solid rgba(255,193,7,0.5)"}], "icon": [{"color": "#FFC107"}]}}, {"value": "off", "styles": {"card": [{"opacity": "0.6"}]}}], "styles": {"card": [{"border-radius": "12px 12px 0 0"}, {"padding": "12px 8px 8px 8px"}], "icon": [{"width": "28px"}], "name": [{"font-size": "11px"}, {"margin-top": "4px"}]}},
-                        {"type": "custom:button-card", "entity": "light.h6061", "icon": "mdi:palette", "show_name": false, "tap_action": {"action": "more-info"}, "styles": {"card": [{"border-radius": "0 0 12px 12px"}, {"padding": "6px"}, {"background": "rgba(255,255,255,0.05)"}], "icon": [{"width": "14px"}, {"color": "var(--secondary-text-color)"}]}}
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.h6061",
+                          "icon": "mdi:wall-sconce-flat",
+                          "name": "Wand",
+                          "show_state": false,
+                          "tap_action": {
+                            "action": "toggle"
+                          },
+                          "state": [
+                            {
+                              "value": "on",
+                              "styles": {
+                                "card": [
+                                  {
+                                    "background": "rgba(255,193,7,0.2)"
+                                  },
+                                  {
+                                    "border": "1px solid rgba(255,193,7,0.5)"
+                                  }
+                                ],
+                                "icon": [
+                                  {
+                                    "color": "#FFC107"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "value": "off",
+                              "styles": {
+                                "card": [
+                                  {
+                                    "opacity": "0.6"
+                                  }
+                                ]
+                              }
+                            }
+                          ],
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "12px 12px 0 0"
+                              },
+                              {
+                                "padding": "12px 8px 8px 8px"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "margin-top": "4px"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.h6061",
+                          "icon": "mdi:palette",
+                          "show_name": false,
+                          "tap_action": {
+                            "action": "more-info"
+                          },
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "0 0 12px 12px"
+                              },
+                              {
+                                "padding": "6px"
+                              },
+                              {
+                                "background": "rgba(255,255,255,0.05)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "14px"
+                              },
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
                       ]
                     },
                     {
                       "type": "vertical-stack",
                       "cards": [
-                        {"type": "custom:button-card", "entity": "light.h619a", "icon": "mdi:bookshelf", "name": "Regal", "show_state": false, "tap_action": {"action": "toggle"}, "state": [{"value": "on", "styles": {"card": [{"background": "rgba(255,193,7,0.2)"}, {"border": "1px solid rgba(255,193,7,0.5)"}], "icon": [{"color": "#FFC107"}]}}, {"value": "off", "styles": {"card": [{"opacity": "0.6"}]}}], "styles": {"card": [{"border-radius": "12px 12px 0 0"}, {"padding": "12px 8px 8px 8px"}], "icon": [{"width": "28px"}], "name": [{"font-size": "11px"}, {"margin-top": "4px"}]}},
-                        {"type": "custom:button-card", "entity": "light.h619a", "icon": "mdi:palette", "show_name": false, "tap_action": {"action": "more-info"}, "styles": {"card": [{"border-radius": "0 0 12px 12px"}, {"padding": "6px"}, {"background": "rgba(255,255,255,0.05)"}], "icon": [{"width": "14px"}, {"color": "var(--secondary-text-color)"}]}}
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.h619a",
+                          "icon": "mdi:bookshelf",
+                          "name": "Regal",
+                          "show_state": false,
+                          "tap_action": {
+                            "action": "toggle"
+                          },
+                          "state": [
+                            {
+                              "value": "on",
+                              "styles": {
+                                "card": [
+                                  {
+                                    "background": "rgba(255,193,7,0.2)"
+                                  },
+                                  {
+                                    "border": "1px solid rgba(255,193,7,0.5)"
+                                  }
+                                ],
+                                "icon": [
+                                  {
+                                    "color": "#FFC107"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "value": "off",
+                              "styles": {
+                                "card": [
+                                  {
+                                    "opacity": "0.6"
+                                  }
+                                ]
+                              }
+                            }
+                          ],
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "12px 12px 0 0"
+                              },
+                              {
+                                "padding": "12px 8px 8px 8px"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "margin-top": "4px"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.h619a",
+                          "icon": "mdi:palette",
+                          "show_name": false,
+                          "tap_action": {
+                            "action": "more-info"
+                          },
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "0 0 12px 12px"
+                              },
+                              {
+                                "padding": "6px"
+                              },
+                              {
+                                "background": "rgba(255,255,255,0.05)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "14px"
+                              },
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
                       ]
                     }
                   ]
@@ -203,13 +2050,923 @@
                     {
                       "type": "vertical-stack",
                       "cards": [
-                        {"type": "custom:button-card", "entity": "light.h6159", "icon": "mdi:stairs", "name": "Treppe", "show_state": false, "tap_action": {"action": "toggle"}, "state": [{"value": "on", "styles": {"card": [{"background": "rgba(255,193,7,0.2)"}, {"border": "1px solid rgba(255,193,7,0.5)"}], "icon": [{"color": "#FFC107"}]}}, {"value": "off", "styles": {"card": [{"opacity": "0.6"}]}}], "styles": {"card": [{"border-radius": "12px 12px 0 0"}, {"padding": "12px 8px 8px 8px"}], "icon": [{"width": "28px"}], "name": [{"font-size": "11px"}, {"margin-top": "4px"}]}},
-                        {"type": "custom:button-card", "entity": "light.h6159", "icon": "mdi:palette", "show_name": false, "tap_action": {"action": "more-info"}, "styles": {"card": [{"border-radius": "0 0 12px 12px"}, {"padding": "6px"}, {"background": "rgba(255,255,255,0.05)"}], "icon": [{"width": "14px"}, {"color": "var(--secondary-text-color)"}]}}
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.h6159",
+                          "icon": "mdi:stairs",
+                          "name": "Treppe",
+                          "show_state": false,
+                          "tap_action": {
+                            "action": "toggle"
+                          },
+                          "state": [
+                            {
+                              "value": "on",
+                              "styles": {
+                                "card": [
+                                  {
+                                    "background": "rgba(255,193,7,0.2)"
+                                  },
+                                  {
+                                    "border": "1px solid rgba(255,193,7,0.5)"
+                                  }
+                                ],
+                                "icon": [
+                                  {
+                                    "color": "#FFC107"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "value": "off",
+                              "styles": {
+                                "card": [
+                                  {
+                                    "opacity": "0.6"
+                                  }
+                                ]
+                              }
+                            }
+                          ],
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "12px 12px 0 0"
+                              },
+                              {
+                                "padding": "12px 8px 8px 8px"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "28px"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "font-size": "11px"
+                              },
+                              {
+                                "margin-top": "4px"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.h6159",
+                          "icon": "mdi:palette",
+                          "show_name": false,
+                          "tap_action": {
+                            "action": "more-info"
+                          },
+                          "styles": {
+                            "card": [
+                              {
+                                "border-radius": "0 0 12px 12px"
+                              },
+                              {
+                                "padding": "6px"
+                              },
+                              {
+                                "background": "rgba(255,255,255,0.05)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "width": "14px"
+                              },
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
                       ]
                     },
-                    {"type": "custom:button-card", "color_type": "blank-card"},
-                    {"type": "custom:button-card", "color_type": "blank-card"},
-                    {"type": "custom:button-card", "color_type": "blank-card"}
+                    {
+                      "type": "custom:button-card",
+                      "color_type": "blank-card"
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "color_type": "blank-card"
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "color_type": "blank-card"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "custom:stack-in-card",
+              "mode": "vertical",
+              "cards": [
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "entity": "binary_sensor.fritz_box_7530_ax_verbindung",
+                      "icon": "mdi:router-wireless",
+                      "name": "FRITZ!Box 7530 AX",
+                      "label": "[[[ return states['sensor.fritz_box_7530_ax_externe_ip'].state ]]]",
+                      "show_label": true,
+                      "show_state": false,
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "icon": [
+                              {
+                                "color": "var(--success-color)"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "color": "var(--primary-text-color)"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "icon": [
+                              {
+                                "color": "var(--error-color)"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "color": "var(--error-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i n\" \"i l\""
+                          },
+                          {
+                            "grid-template-columns": "45px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "36px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "16px"
+                          },
+                          {
+                            "font-weight": "600"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          },
+                          {
+                            "font-family": "monospace"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.fritz_box_7530_ax_cpu_temperatur",
+                      "icon": "mdi:thermometer",
+                      "name": "CPU",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "30px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "[[[ if (entity.state > 70) return 'var(--error-color)'; else if (entity.state > 60) return 'var(--warning-color)'; else return 'var(--success-color)'; ]]]"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "16px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.fritz_download_prozent",
+                      "icon": "mdi:download",
+                      "name": "[[[ return (states['sensor.fritz_box_7530_ax_download_durchsatz'].state * 8 / 1000).toFixed(1) + ' / 120 Mbit/s' ]]]",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return entity.state + '%' ]]]",
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "rgba(76, 175, 80, 0.15)"
+                          },
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "35px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "28px"
+                          },
+                          {
+                            "color": "#4CAF50"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "20px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          },
+                          {
+                            "color": "#4CAF50"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.fritz_upload_prozent",
+                      "icon": "mdi:upload",
+                      "name": "[[[ return (states['sensor.fritz_box_7530_ax_upload_durchsatz'].state * 8 / 1000).toFixed(1) + ' / 40 Mbit/s' ]]]",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return entity.state + '%' ]]]",
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "rgba(33, 150, 243, 0.15)"
+                          },
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "35px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "28px"
+                          },
+                          {
+                            "color": "#2196F3"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "20px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          },
+                          {
+                            "color": "#2196F3"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.fritz_connected_clients",
+                      "icon": "mdi:devices",
+                      "name": "Verbunden",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "8px 12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "30px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "18px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.fritz_wlan_clients",
+                      "icon": "mdi:wifi",
+                      "name": "WLAN",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "8px 12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "30px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "18px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.fritz_box_7530_ax_gb_empfangen",
+                      "icon": "mdi:arrow-down-bold-circle",
+                      "name": "Empfangen",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return Math.round(entity.state) + ' GB' ]]]",
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "8px 12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "30px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "#4CAF50"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.fritz_box_7530_ax_gb_gesendet",
+                      "icon": "mdi:arrow-up-bold-circle",
+                      "name": "Gesendet",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return Math.round(entity.state) + ' GB' ]]]",
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          },
+                          {
+                            "padding": "8px 12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i s\" \"i n\""
+                          },
+                          {
+                            "grid-template-columns": "30px 1fr"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "#2196F3"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "11px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          },
+                          {
+                            "justify-self": "start"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "entity": "switch.fritz_box_7530_ax_wi_fi_gehfoddernsthaft_2_4ghz",
+                      "icon": "mdi:wifi",
+                      "name": "2.4 GHz",
+                      "show_state": false,
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(76, 175, 80, 0.2)"
+                              },
+                              {
+                                "border": "1px solid rgba(76, 175, 80, 0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "10px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "12px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "switch.fritz_box_7530_ax_wi_fi_gehfoddernsthaft_5ghz",
+                      "icon": "mdi:wifi",
+                      "name": "5 GHz",
+                      "show_state": false,
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(76, 175, 80, 0.2)"
+                              },
+                              {
+                                "border": "1px solid rgba(76, 175, 80, 0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "10px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "12px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "switch.fritz_box_7530_ax_wi_fi_fritz_box_gastzugang",
+                      "icon": "mdi:account-multiple",
+                      "name": "Gast",
+                      "show_state": false,
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(255, 152, 0, 0.2)"
+                              },
+                              {
+                                "border": "1px solid rgba(255, 152, 0, 0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#FF9800"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "#FF9800"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "10px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "12px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "button.fritz_box_7530_ax_neu_verbinden",
+                      "icon": "mdi:refresh",
+                      "name": "Reconnect",
+                      "show_state": false,
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "button.press",
+                        "service_data": {
+                          "entity_id": "button.fritz_box_7530_ax_neu_verbinden"
+                        }
+                      },
+                      "confirmation": {
+                        "text": "Internetverbindung neu aufbauen?"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "10px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "var(--warning-color)"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "12px"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    }
                   ]
                 }
               ]
