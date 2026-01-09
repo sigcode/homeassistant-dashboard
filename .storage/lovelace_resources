@@ -18,6 +18,21 @@
         "id": "stack-in-card",
         "type": "module",
         "url": "/local/community/stack-in-card.js"
+      },
+      {
+        "id": "better-thermostat-ui-card",
+        "type": "module",
+        "url": "/local/community/better-thermostat-ui-card.js"
+      },
+      {
+        "id": "bc451a925e1d431fa2297b3a7bee2352",
+        "url": "/hacsfiles/apexcharts-card/apexcharts-card.js?hacstag=331701152223",
+        "type": "module"
+      },
+      {
+        "id": "658055abd6d24f1692a9e6a08e0522ed",
+        "url": "/browser_mod.js?automatically-added&2.6.4",
+        "type": "module"
       }
     ]
   }

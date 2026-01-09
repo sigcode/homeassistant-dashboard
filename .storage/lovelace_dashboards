@@ -21,6 +21,15 @@
         "show_in_sidebar": true,
         "require_admin": false,
         "mode": "storage"
+      },
+      {
+        "id": "steckdosen",
+        "icon": "mdi:power-plug",
+        "title": "Steckdosen",
+        "url_path": "steckdosen",
+        "show_in_sidebar": true,
+        "require_admin": false,
+        "mode": "storage"
       }
     ]
   }

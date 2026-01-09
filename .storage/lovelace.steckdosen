@@ -1,0 +1,613 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.steckdosen",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Steckdosen",
+          "path": "default_view",
+          "icon": "mdi:power-plug",
+          "cards": [
+            {
+              "type": "custom:stack-in-card",
+              "mode": "vertical",
+              "cards": [
+                {
+                  "type": "markdown",
+                  "content": "### \u26a1 Smart Steckdosen",
+                  "card_mod": {
+                    "style": "ha-card { background: transparent; box-shadow: none; padding: 8px 0 0 0; }"
+                  }
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "entity": "switch.server_switch_1",
+                      "icon": "mdi:server",
+                      "name": "Server",
+                      "show_state": false,
+                      "show_label": true,
+                      "label": "[[[ return states[\"sensor.server_power\"].state + \" W\" ]]]",
+                      "tap_action": {
+                        "action": "none"
+                      },
+                      "hold_action": {
+                        "action": "more-info"
+                      },
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(76, 175, 80, 0.2)"
+                              },
+                              {
+                                "border": "1px solid rgba(76, 175, 80, 0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "16px 12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i\" \"n\" \"l\""
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "32px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "font-weight": "500"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "18px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "switch.rechner_switch_1",
+                      "icon": "mdi:desktop-tower",
+                      "name": "Rechner",
+                      "show_state": false,
+                      "show_label": true,
+                      "label": "[[[ return states[\"sensor.rechner_power\"].state + \" W\" ]]]",
+                      "tap_action": {
+                        "action": "none"
+                      },
+                      "hold_action": {
+                        "action": "more-info"
+                      },
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(76, 175, 80, 0.2)"
+                              },
+                              {
+                                "border": "1px solid rgba(76, 175, 80, 0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "16px 12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i\" \"n\" \"l\""
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "32px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "font-weight": "500"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "18px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "switch.nuki_switch_1",
+                      "icon": "mdi:lock",
+                      "name": "Nuki",
+                      "show_state": false,
+                      "show_label": true,
+                      "label": "[[[ return states[\"sensor.nuki_power\"].state + \" W\" ]]]",
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "hold_action": {
+                        "action": "more-info"
+                      },
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(76, 175, 80, 0.2)"
+                              },
+                              {
+                                "border": "1px solid rgba(76, 175, 80, 0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "16px 12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i\" \"n\" \"l\""
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "32px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "font-weight": "500"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "18px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "entity": "switch.bambulab_a1_switch_1",
+                      "icon": "mdi:printer-3d",
+                      "name": "Bambulab A1",
+                      "show_state": false,
+                      "show_label": true,
+                      "label": "[[[ return states[\"sensor.bambulab_a1_power\"].state + \" W\" ]]]",
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "hold_action": {
+                        "action": "more-info"
+                      },
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(76, 175, 80, 0.2)"
+                              },
+                              {
+                                "border": "1px solid rgba(76, 175, 80, 0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "16px 12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i\" \"n\" \"l\""
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "32px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "font-weight": "500"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "18px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "switch.lelit_switch_1",
+                      "icon": "mdi:coffee-maker",
+                      "name": "Lelit",
+                      "show_state": false,
+                      "show_label": true,
+                      "label": "[[[ return states[\"sensor.lelit_power\"].state + \" W\" ]]]",
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "hold_action": {
+                        "action": "more-info"
+                      },
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(76, 175, 80, 0.2)"
+                              },
+                              {
+                                "border": "1px solid rgba(76, 175, 80, 0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "16px 12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i\" \"n\" \"l\""
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "32px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "font-weight": "500"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "18px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "color_type": "blank-card",
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "custom:stack-in-card",
+              "mode": "vertical",
+              "cards": [
+                {
+                  "type": "markdown",
+                  "content": "### \ud83d\udcca Gesamtverbrauch",
+                  "card_mod": {
+                    "style": "ha-card { background: transparent; box-shadow: none; padding: 8px 0 0 0; }"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "entity": "sensor.server_power",
+                  "show_entity_picture": false,
+                  "show_icon": false,
+                  "show_name": false,
+                  "show_state": true,
+                  "state_display": "[[[ return (parseFloat(states[\"sensor.server_power\"].state) + parseFloat(states[\"sensor.rechner_power\"].state) + parseFloat(states[\"sensor.nuki_power\"].state) + parseFloat(states[\"sensor.bambulab_a1_power\"].state) + parseFloat(states[\"sensor.lelit_power\"].state)).toFixed(1) + \" W\" ]]]",
+                  "styles": {
+                    "card": [
+                      {
+                        "background": "rgba(255, 152, 0, 0.15)"
+                      },
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "20px"
+                      }
+                    ],
+                    "state": [
+                      {
+                        "font-size": "36px"
+                      },
+                      {
+                        "font-weight": "bold"
+                      },
+                      {
+                        "color": "#FF9800"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "history-graph",
+                  "title": "Verbrauch (24h)",
+                  "hours_to_show": 24,
+                  "entities": [
+                    {
+                      "entity": "sensor.server_power",
+                      "name": "Server"
+                    },
+                    {
+                      "entity": "sensor.rechner_power",
+                      "name": "Rechner"
+                    },
+                    {
+                      "entity": "sensor.lelit_power",
+                      "name": "Lelit"
+                    },
+                    {
+                      "entity": "sensor.bambulab_a1_power",
+                      "name": "Bambulab"
+                    },
+                    {
+                      "entity": "sensor.nuki_power",
+                      "name": "Nuki"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
