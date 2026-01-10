@@ -170,3 +170,36 @@
           - input_number.heizung_bad_nacht_temperatur
       data:
         value: "{{ states('input_number.heizung_alle_nacht_temperatur') | float }}"
+
+
+- id: 'fritz_auto_reload'
+  alias: 'Fritz!Box Integration Auto-Reload'
+  description: 'Lädt die Fritz!Box Integration automatisch neu wenn die Verbindung verloren geht'
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: time_pattern
+      minutes: "/5"
+    - platform: state
+      entity_id: binary_sensor.fritz_box_7530_ax_verbindung
+      to: "unavailable"
+      for:
+        minutes: 2
+  condition:
+    - condition: state
+      entity_id: binary_sensor.fritz_box_7530_ax_verbindung
+      state: "unavailable"
+  action:
+    - delay:
+        seconds: 30
+    - service: homeassistant.reload_config_entry
+      data:
+        entry_id: 01KDD3ZC8W9XFFCHHDTW5VDSZ7
+    - service: homeassistant.reload_config_entry
+      data:
+        entry_id: 01K9FVBT4VJMV74CVE6YGQ1S8J
+    - service: persistent_notification.create
+      data:
+        title: 'Fritz!Box Integration'
+        message: 'Fritz!Box Integration wurde automatisch neu geladen wegen Verbindungsverlust'
+  mode: single
