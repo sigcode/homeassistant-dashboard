@@ -38,7 +38,6 @@ input_number:
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:thermometer
-    initial: 22
   heizung_buero_nacht_temperatur:
     name: "Büro Nachttemperatur"
     min: 14
@@ -46,7 +45,6 @@ input_number:
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:thermometer-low
-    initial: 16
   heizung_bad_tag_temperatur:
     name: "Bad Tagestemperatur"
     min: 16
@@ -54,7 +52,6 @@ input_number:
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:thermometer
-    initial: 22
   heizung_bad_nacht_temperatur:
     name: "Bad Nachttemperatur"
     min: 14
@@ -62,7 +59,6 @@ input_number:
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:thermometer-low
-    initial: 16
   heizung_waschraum_tag_temperatur:
     name: "Waschraum Tagestemperatur"
     min: 16
@@ -70,7 +66,6 @@ input_number:
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:thermometer
-    initial: 22
   heizung_waschraum_nacht_temperatur:
     name: "Waschraum Nachttemperatur"
     min: 14
@@ -78,7 +73,6 @@ input_number:
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:thermometer-low
-    initial: 16
   heizung_kueche_tag_temperatur:
     name: "Küche Tagestemperatur"
     min: 16
@@ -86,7 +80,6 @@ input_number:
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:thermometer
-    initial: 22
   heizung_kueche_nacht_temperatur:
     name: "Küche Nachttemperatur"
     min: 14
@@ -94,7 +87,6 @@ input_number:
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:thermometer-low
-    initial: 16
   heizung_sauna_tag_temperatur:
     name: "Sauna Tagestemperatur"
     min: 16
@@ -102,7 +94,6 @@ input_number:
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:thermometer
-    initial: 20
   heizung_sauna_nacht_temperatur:
     name: "Sauna Nachttemperatur"
     min: 14
@@ -110,7 +101,6 @@ input_number:
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:thermometer-low
-    initial: 16
   # Globale Einstellungen für alle Thermostate
   heizung_alle_tag_temperatur:
     name: "Alle Tagestemperatur"
@@ -119,7 +109,6 @@ input_number:
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:home-thermometer
-    initial: 22
   heizung_alle_nacht_temperatur:
     name: "Alle Nachttemperatur"
     min: 14
@@ -127,7 +116,6 @@ input_number:
     step: 0.5
     unit_of_measurement: "°C"
     icon: mdi:home-thermometer-outline
-    initial: 16
 
 # Graph Toggle Helfer
 input_boolean:
@@ -154,7 +142,7 @@ template:
         unique_id: fritz_connected_clients
         icon: mdi:devices
         state: >
-          {{ states.device_tracker 
+          {{ states.device_tracker
              | selectattr('attributes.source_type', 'eq', 'router')
              | selectattr('state', 'eq', 'home')
              | list | count }}
@@ -162,7 +150,7 @@ template:
         unique_id: fritz_wlan_clients
         icon: mdi:wifi
         state: >
-          {{ states.device_tracker 
+          {{ states.device_tracker
              | selectattr('attributes.source_type', 'eq', 'router')
              | selectattr('state', 'eq', 'home')
              | selectattr('attributes.connection_type', 'defined')
