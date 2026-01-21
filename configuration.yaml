@@ -95,6 +95,22 @@ input_number:
     unit_of_measurement: "°C"
     icon: mdi:thermometer-low
     initial: 16
+  heizung_sauna_tag_temperatur:
+    name: "Sauna Tagestemperatur"
+    min: 16
+    max: 25
+    step: 0.5
+    unit_of_measurement: "°C"
+    icon: mdi:thermometer
+    initial: 20
+  heizung_sauna_nacht_temperatur:
+    name: "Sauna Nachttemperatur"
+    min: 14
+    max: 20
+    step: 0.5
+    unit_of_measurement: "°C"
+    icon: mdi:thermometer-low
+    initial: 16
   # Globale Einstellungen für alle Thermostate
   heizung_alle_tag_temperatur:
     name: "Alle Tagestemperatur"
@@ -126,6 +142,9 @@ input_boolean:
     icon: mdi:chart-line
   heizung_kueche_graph:
     name: "Küche Temperaturverlauf anzeigen"
+    icon: mdi:chart-line
+  heizung_sauna_graph:
+    name: "Sauna Temperaturverlauf anzeigen"
     icon: mdi:chart-line
 
 # Fritzbox Connected Clients Counter

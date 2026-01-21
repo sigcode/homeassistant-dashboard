@@ -294,6 +294,85 @@
       data:
         temperature: "{{ states('input_number.heizung_kueche_nacht_temperatur') | float }}"
 
+- id: heizung_sauna_tag
+  alias: "Heizung Sauna - Tagesmodus"
+  description: "Sauna (beide Thermostate) auf eingestellte Tagestemperatur von 7:00 bis 22:00"
+  trigger:
+    - platform: time
+      at: "07:00:00"
+      id: time_trigger
+    - platform: homeassistant
+      event: start
+      id: startup_trigger
+    - platform: time_pattern
+      minutes: "/5"
+      id: retry_trigger
+    - platform: state
+      entity_id: input_number.heizung_sauna_tag_temperatur
+      id: temp_changed
+  condition:
+    - condition: time
+      after: "07:00:00"
+      before: "22:00:00"
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id:
+          - climate.heizung_sauna_l
+          - climate.heizung_sauna_r
+      data:
+        hvac_mode: auto
+    - delay:
+        milliseconds: 500
+    - service: climate.set_temperature
+      target:
+        entity_id:
+          - climate.heizung_sauna_l
+          - climate.heizung_sauna_r
+      data:
+        temperature: "{{ states('input_number.heizung_sauna_tag_temperatur') | float }}"
+
+- id: heizung_sauna_nacht
+  alias: "Heizung Sauna - Nachtmodus"
+  description: "Sauna (beide Thermostate) auf eingestellte Nachttemperatur ab 22:00"
+  trigger:
+    - platform: time
+      at: "22:00:00"
+      id: time_trigger
+    - platform: homeassistant
+      event: start
+      id: startup_trigger
+    - platform: time_pattern
+      minutes: "/5"
+      id: retry_trigger
+    - platform: state
+      entity_id: input_number.heizung_sauna_nacht_temperatur
+      id: temp_changed
+  condition:
+    - condition: or
+      conditions:
+        - condition: time
+          after: "22:00:00"
+        - condition: time
+          before: "07:00:00"
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id:
+          - climate.heizung_sauna_l
+          - climate.heizung_sauna_r
+      data:
+        hvac_mode: auto
+    - delay:
+        milliseconds: 500
+    - service: climate.set_temperature
+      target:
+        entity_id:
+          - climate.heizung_sauna_l
+          - climate.heizung_sauna_r
+      data:
+        temperature: "{{ states('input_number.heizung_sauna_nacht_temperatur') | float }}"
+
 # Globale Temperatur-Synchronisation
 - id: heizung_alle_tag_sync
   alias: "Heizung Alle - Tag Temperatur Sync"
@@ -309,6 +388,7 @@
           - input_number.heizung_bad_tag_temperatur
           - input_number.heizung_waschraum_tag_temperatur
           - input_number.heizung_kueche_tag_temperatur
+          - input_number.heizung_sauna_tag_temperatur
       data:
         value: "{{ states('input_number.heizung_alle_tag_temperatur') | float }}"
 
@@ -326,6 +406,7 @@
           - input_number.heizung_bad_nacht_temperatur
           - input_number.heizung_waschraum_nacht_temperatur
           - input_number.heizung_kueche_nacht_temperatur
+          - input_number.heizung_sauna_nacht_temperatur
       data:
         value: "{{ states('input_number.heizung_alle_nacht_temperatur') | float }}"
 
