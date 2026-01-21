@@ -140,6 +140,160 @@
       data:
         temperature: "{{ states('input_number.heizung_bad_nacht_temperatur') | float }}"
 
+- id: heizung_waschraum_tag
+  alias: "Heizung Waschraum - Tagesmodus"
+  description: "Waschraum auf eingestellte Tagestemperatur von 7:00 bis 22:00"
+  trigger:
+    - platform: time
+      at: "07:00:00"
+      id: time_trigger
+    - platform: homeassistant
+      event: start
+      id: startup_trigger
+    - platform: time_pattern
+      minutes: "/5"
+      id: retry_trigger
+    - platform: state
+      entity_id: input_number.heizung_waschraum_tag_temperatur
+      id: temp_changed
+  condition:
+    - condition: time
+      after: "07:00:00"
+      before: "22:00:00"
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id: climate.heizung_waschraum
+      data:
+        hvac_mode: auto
+    - delay:
+        milliseconds: 500
+    - service: climate.set_temperature
+      target:
+        entity_id: climate.heizung_waschraum
+      data:
+        temperature: "{{ states('input_number.heizung_waschraum_tag_temperatur') | float }}"
+
+- id: heizung_waschraum_nacht
+  alias: "Heizung Waschraum - Nachtmodus"
+  description: "Waschraum auf eingestellte Nachttemperatur ab 22:00"
+  trigger:
+    - platform: time
+      at: "22:00:00"
+      id: time_trigger
+    - platform: homeassistant
+      event: start
+      id: startup_trigger
+    - platform: time_pattern
+      minutes: "/5"
+      id: retry_trigger
+    - platform: state
+      entity_id: input_number.heizung_waschraum_nacht_temperatur
+      id: temp_changed
+  condition:
+    - condition: or
+      conditions:
+        - condition: time
+          after: "22:00:00"
+        - condition: time
+          before: "07:00:00"
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id: climate.heizung_waschraum
+      data:
+        hvac_mode: auto
+    - delay:
+        milliseconds: 500
+    - service: climate.set_temperature
+      target:
+        entity_id: climate.heizung_waschraum
+      data:
+        temperature: "{{ states('input_number.heizung_waschraum_nacht_temperatur') | float }}"
+
+- id: heizung_kueche_tag
+  alias: "Heizung Küche - Tagesmodus"
+  description: "Küche (alle 3 Thermostate) auf eingestellte Tagestemperatur von 7:00 bis 22:00"
+  trigger:
+    - platform: time
+      at: "07:00:00"
+      id: time_trigger
+    - platform: homeassistant
+      event: start
+      id: startup_trigger
+    - platform: time_pattern
+      minutes: "/5"
+      id: retry_trigger
+    - platform: state
+      entity_id: input_number.heizung_kueche_tag_temperatur
+      id: temp_changed
+  condition:
+    - condition: time
+      after: "07:00:00"
+      before: "22:00:00"
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id:
+          - climate.heizung_kuche_l
+          - climate.heizung_kuche_m
+          - climate.heizung_kuche_r
+      data:
+        hvac_mode: auto
+    - delay:
+        milliseconds: 500
+    - service: climate.set_temperature
+      target:
+        entity_id:
+          - climate.heizung_kuche_l
+          - climate.heizung_kuche_m
+          - climate.heizung_kuche_r
+      data:
+        temperature: "{{ states('input_number.heizung_kueche_tag_temperatur') | float }}"
+
+- id: heizung_kueche_nacht
+  alias: "Heizung Küche - Nachtmodus"
+  description: "Küche (alle 3 Thermostate) auf eingestellte Nachttemperatur ab 22:00"
+  trigger:
+    - platform: time
+      at: "22:00:00"
+      id: time_trigger
+    - platform: homeassistant
+      event: start
+      id: startup_trigger
+    - platform: time_pattern
+      minutes: "/5"
+      id: retry_trigger
+    - platform: state
+      entity_id: input_number.heizung_kueche_nacht_temperatur
+      id: temp_changed
+  condition:
+    - condition: or
+      conditions:
+        - condition: time
+          after: "22:00:00"
+        - condition: time
+          before: "07:00:00"
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id:
+          - climate.heizung_kuche_l
+          - climate.heizung_kuche_m
+          - climate.heizung_kuche_r
+      data:
+        hvac_mode: auto
+    - delay:
+        milliseconds: 500
+    - service: climate.set_temperature
+      target:
+        entity_id:
+          - climate.heizung_kuche_l
+          - climate.heizung_kuche_m
+          - climate.heizung_kuche_r
+      data:
+        temperature: "{{ states('input_number.heizung_kueche_nacht_temperatur') | float }}"
+
 # Globale Temperatur-Synchronisation
 - id: heizung_alle_tag_sync
   alias: "Heizung Alle - Tag Temperatur Sync"
@@ -153,6 +307,8 @@
         entity_id:
           - input_number.heizung_buero_tag_temperatur
           - input_number.heizung_bad_tag_temperatur
+          - input_number.heizung_waschraum_tag_temperatur
+          - input_number.heizung_kueche_tag_temperatur
       data:
         value: "{{ states('input_number.heizung_alle_tag_temperatur') | float }}"
 
@@ -168,6 +324,8 @@
         entity_id:
           - input_number.heizung_buero_nacht_temperatur
           - input_number.heizung_bad_nacht_temperatur
+          - input_number.heizung_waschraum_nacht_temperatur
+          - input_number.heizung_kueche_nacht_temperatur
       data:
         value: "{{ states('input_number.heizung_alle_nacht_temperatur') | float }}"
 
@@ -203,3 +361,59 @@
         title: 'Fritz!Box Integration'
         message: 'Fritz!Box Integration wurde automatisch neu geladen wegen Verbindungsverlust'
   mode: single
+
+# Büro LED Dimmer - Drehknopf
+- id: buero_dimmer_brightness_up
+  alias: "Büro Dimmer - Heller"
+  description: "Erhöht Helligkeit aller Büro LEDs beim Rechtsdrehen"
+  trigger:
+    - platform: mqtt
+      topic: "zigbee2mqtt/Knopf Büro/action"
+      payload: "rotate_right"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id:
+          - light.buro_leds
+          - light.h619a
+          - light.h6061
+          - light.wled_3
+          - light.wled_4
+      data:
+        brightness_step_pct: 10
+
+- id: buero_dimmer_brightness_down
+  alias: "Büro Dimmer - Dunkler"
+  description: "Verringert Helligkeit aller Büro LEDs beim Linksdrehen"
+  trigger:
+    - platform: mqtt
+      topic: "zigbee2mqtt/Knopf Büro/action"
+      payload: "rotate_left"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id:
+          - light.buro_leds
+          - light.h619a
+          - light.h6061
+          - light.wled_3
+          - light.wled_4
+      data:
+        brightness_step_pct: -10
+
+- id: buero_dimmer_toggle
+  alias: "Büro Dimmer - An/Aus"
+  description: "Schaltet alle Büro LEDs beim Drücken"
+  trigger:
+    - platform: mqtt
+      topic: "zigbee2mqtt/Knopf Büro/action"
+      payload: "single"
+  action:
+    - service: light.toggle
+      target:
+        entity_id:
+          - light.buro_leds
+          - light.h619a
+          - light.h6061
+          - light.wled_3
+          - light.wled_4

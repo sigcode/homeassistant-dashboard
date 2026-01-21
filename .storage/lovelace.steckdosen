@@ -516,14 +516,194 @@
                     },
                     {
                       "type": "custom:button-card",
-                      "color_type": "blank-card",
+                      "entity": "switch.steckdose_fred",
+                      "icon": "mdi:robot-vacuum",
+                      "name": "Fred",
+                      "show_state": false,
+                      "show_label": true,
+                      "label": "[[[ return states[\"sensor.steckdose_fred_power\"].state + \" W\" ]]]",
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "hold_action": {
+                        "action": "more-info"
+                      },
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(76, 175, 80, 0.2)"
+                              },
+                              {
+                                "border": "1px solid rgba(76, 175, 80, 0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
                       "styles": {
                         "card": [
                           {
-                            "background": "transparent"
+                            "border-radius": "12px"
                           },
                           {
-                            "box-shadow": "none"
+                            "padding": "16px 12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i\" \"n\" \"l\""
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "32px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "font-weight": "500"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "18px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "switch.steckdose_helene",
+                      "icon": "mdi:power-plug",
+                      "name": "Helene",
+                      "show_state": false,
+                      "show_label": true,
+                      "label": "[[[ return states[\"sensor.steckdose_helene_power\"].state + \" W\" ]]]",
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "hold_action": {
+                        "action": "more-info"
+                      },
+                      "state": [
+                        {
+                          "value": "on",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(76, 175, 80, 0.2)"
+                              },
+                              {
+                                "border": "1px solid rgba(76, 175, 80, 0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ],
+                            "label": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "off",
+                          "styles": {
+                            "card": [
+                              {
+                                "opacity": "0.5"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "var(--secondary-text-color)"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "12px"
+                          },
+                          {
+                            "padding": "16px 12px"
+                          }
+                        ],
+                        "grid": [
+                          {
+                            "grid-template-areas": "\"i\" \"n\" \"l\""
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "32px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "13px"
+                          },
+                          {
+                            "font-weight": "500"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ],
+                        "label": [
+                          {
+                            "font-size": "18px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          },
+                          {
+                            "margin-top": "4px"
                           }
                         ]
                       }
@@ -550,7 +730,7 @@
                   "show_icon": false,
                   "show_name": false,
                   "show_state": true,
-                  "state_display": "[[[ return (parseFloat(states[\"sensor.server_power\"].state) + parseFloat(states[\"sensor.rechner_power\"].state) + parseFloat(states[\"sensor.nuki_power\"].state) + parseFloat(states[\"sensor.bambulab_a1_power\"].state) + parseFloat(states[\"sensor.lelit_power\"].state)).toFixed(1) + \" W\" ]]]",
+                  "state_display": "[[[ return (parseFloat(states['sensor.server_power'].state || 0) + parseFloat(states['sensor.rechner_power'].state || 0) + parseFloat(states['sensor.nuki_power'].state || 0) + parseFloat(states['sensor.bambulab_a1_power'].state || 0) + parseFloat(states['sensor.lelit_power'].state || 0) + parseFloat(states['sensor.steckdose_fred_power'].state || 0) + parseFloat(states['sensor.steckdose_helene_power'].state || 0)).toFixed(1) + ' W aktuell' ]]]",
                   "styles": {
                     "card": [
                       {
@@ -560,12 +740,12 @@
                         "border-radius": "12px"
                       },
                       {
-                        "padding": "20px"
+                        "padding": "15px"
                       }
                     ],
                     "state": [
                       {
-                        "font-size": "36px"
+                        "font-size": "28px"
                       },
                       {
                         "font-weight": "bold"
@@ -577,8 +757,354 @@
                   }
                 },
                 {
+                  "type": "markdown",
+                  "content": "#### Gesamtenergie (seit Installation)",
+                  "card_mod": {
+                    "style": "ha-card { background: transparent; box-shadow: none; padding: 8px 0 0 0; }"
+                  }
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.server_energie_gesamt",
+                      "icon": "mdi:server",
+                      "name": "Server",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return parseFloat(entity.state).toFixed(2) + ' kWh' ]]]",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "10px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.rechner_energie_gesamt",
+                      "icon": "mdi:desktop-tower",
+                      "name": "Rechner",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return parseFloat(entity.state).toFixed(2) + ' kWh' ]]]",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "10px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.nuki_energie_gesamt",
+                      "icon": "mdi:lock",
+                      "name": "Nuki",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return parseFloat(entity.state).toFixed(2) + ' kWh' ]]]",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "10px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.bambulab_a1_energie_gesamt",
+                      "icon": "mdi:printer-3d",
+                      "name": "Bambulab",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return parseFloat(entity.state).toFixed(2) + ' kWh' ]]]",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "10px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.lelit_energie_gesamt",
+                      "icon": "mdi:coffee-maker",
+                      "name": "Lelit",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return parseFloat(entity.state).toFixed(2) + ' kWh' ]]]",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "10px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.steckdose_fred_energy",
+                      "icon": "mdi:robot-vacuum",
+                      "name": "Fred",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return parseFloat(entity.state).toFixed(2) + ' kWh' ]]]",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "10px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "sensor.steckdose_helene_energy",
+                      "icon": "mdi:power-plug",
+                      "name": "Helene",
+                      "show_state": true,
+                      "show_name": true,
+                      "layout": "icon_state_name2nd",
+                      "state_display": "[[[ return parseFloat(entity.state).toFixed(2) + ' kWh' ]]]",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "background": "transparent"
+                          },
+                          {
+                            "box-shadow": "none"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "24px"
+                          },
+                          {
+                            "color": "var(--primary-color)"
+                          }
+                        ],
+                        "state": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "bold"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "10px"
+                          },
+                          {
+                            "color": "var(--secondary-text-color)"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
                   "type": "history-graph",
-                  "title": "Verbrauch (24h)",
+                  "title": "Leistung (24h)",
                   "hours_to_show": 24,
                   "entities": [
                     {
@@ -600,6 +1126,14 @@
                     {
                       "entity": "sensor.nuki_power",
                       "name": "Nuki"
+                    },
+                    {
+                      "entity": "sensor.steckdose_fred_power",
+                      "name": "Fred"
+                    },
+                    {
+                      "entity": "sensor.steckdose_helene_power",
+                      "name": "Helene"
                     }
                   ]
                 }

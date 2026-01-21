@@ -25,8 +25,8 @@
                       "type": "custom:button-card",
                       "entity": "light.buro_leds",
                       "icon": "mdi:lightbulb-group",
-                      "name": "Büro LEDs",
-                      "label": "TV · Schreibtisch · Wand · Regal",
+                      "name": "B\u00fcro LEDs",
+                      "label": "TV \u00b7 Schreibtisch \u00b7 Wand \u00b7 Regal",
                       "show_label": true,
                       "show_state": false,
                       "tap_action": {
@@ -1429,6 +1429,305 @@
                           },
                           {
                             "margin-top": "4px"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "custom:stack-in-card",
+              "mode": "vertical",
+              "cards": [
+                {
+                  "type": "markdown",
+                  "content": "### Hoftor"
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "entity": "lock.hoftor",
+                      "icon": "mdi:gate",
+                      "name": "Schloss",
+                      "show_state": false,
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "hold_action": {
+                        "action": "more-info"
+                      },
+                      "state": [
+                        {
+                          "value": "locked",
+                          "icon": "mdi:lock",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "linear-gradient(135deg, rgba(76,175,80,0.3) 0%, rgba(56,142,60,0.3) 100%)"
+                              },
+                              {
+                                "border": "2px solid rgba(76,175,80,0.6)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "unlocked",
+                          "icon": "mdi:lock-open",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "linear-gradient(135deg, rgba(255,152,0,0.3) 0%, rgba(245,124,0,0.3) 100%)"
+                              },
+                              {
+                                "border": "2px solid rgba(255,152,0,0.6)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#FF9800"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "#FF9800"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "locking",
+                          "icon": "mdi:lock-clock",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(33,150,243,0.2)"
+                              },
+                              {
+                                "border": "2px solid rgba(33,150,243,0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#2196F3"
+                              },
+                              {
+                                "animation": "blink 1s ease infinite"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "#2196F3"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "unlocking",
+                          "icon": "mdi:lock-clock",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(33,150,243,0.2)"
+                              },
+                              {
+                                "border": "2px solid rgba(33,150,243,0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#2196F3"
+                              },
+                              {
+                                "animation": "blink 1s ease infinite"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "#2196F3"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "16px"
+                          },
+                          {
+                            "padding": "20px 16px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "42px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "500"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "binary_sensor.hoftor",
+                      "icon": "mdi:door",
+                      "name": "T\u00fcr",
+                      "show_state": false,
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "state": [
+                        {
+                          "value": "off",
+                          "icon": "mdi:door-closed",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(76,175,80,0.15)"
+                              },
+                              {
+                                "border": "1px solid rgba(76,175,80,0.4)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "#4CAF50"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "value": "on",
+                          "icon": "mdi:door-open",
+                          "styles": {
+                            "card": [
+                              {
+                                "background": "rgba(244,67,54,0.2)"
+                              },
+                              {
+                                "border": "1px solid rgba(244,67,54,0.5)"
+                              }
+                            ],
+                            "icon": [
+                              {
+                                "color": "#F44336"
+                              }
+                            ],
+                            "name": [
+                              {
+                                "color": "#F44336"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "16px"
+                          },
+                          {
+                            "padding": "20px 16px"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "42px"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "500"
+                          },
+                          {
+                            "margin-top": "8px"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "lock.hoftor",
+                      "icon": "mdi:door-open",
+                      "name": "\u00d6ffnen",
+                      "show_state": false,
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "lock.open",
+                        "service_data": {
+                          "entity_id": "lock.hoftor"
+                        }
+                      },
+                      "confirmation": {
+                        "text": "Tor \u00f6ffnen?"
+                      },
+                      "styles": {
+                        "card": [
+                          {
+                            "border-radius": "16px"
+                          },
+                          {
+                            "padding": "20px 16px"
+                          },
+                          {
+                            "background": "rgba(33,150,243,0.15)"
+                          },
+                          {
+                            "border": "1px solid rgba(33,150,243,0.4)"
+                          }
+                        ],
+                        "icon": [
+                          {
+                            "width": "42px"
+                          },
+                          {
+                            "color": "#2196F3"
+                          }
+                        ],
+                        "name": [
+                          {
+                            "font-size": "14px"
+                          },
+                          {
+                            "font-weight": "500"
+                          },
+                          {
+                            "margin-top": "8px"
+                          },
+                          {
+                            "color": "#2196F3"
                           }
                         ]
                       }
