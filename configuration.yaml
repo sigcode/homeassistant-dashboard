@@ -182,3 +182,20 @@ template:
           {% set current = states('sensor.fritz_box_7530_ax_upload_durchsatz') | float(0) * 8 %}
           {% set max = states('sensor.fritz_box_7530_ax_maximaler_upload_durchsatz_der_verbindung') | float(1) %}
           {{ ((current / max) * 100) | round(1) }}
+
+# Energie-Sensoren für Zigbee Steckdosen (berechnet aus Leistung)
+sensor:
+  - platform: integration
+    source: sensor.steckdose_fred_power
+    name: "Steckdose Fred Energie"
+    unique_id: steckdose_fred_energy_calculated
+    unit_prefix: k
+    unit_time: h
+    method: left
+  - platform: integration
+    source: sensor.steckdose_helene_power
+    name: "Steckdose Helene Energie"
+    unique_id: steckdose_helene_energy_calculated
+    unit_prefix: k
+    unit_time: h
+    method: left
