@@ -33,7 +33,10 @@
                       "show_label": true,
                       "label": "[[[ return states[\"sensor.server_power\"].state + \" W\" ]]]",
                       "tap_action": {
-                        "action": "none"
+                        "action": "toggle",
+                        "confirmation": {
+                          "text": "Server wirklich schalten?"
+                        }
                       },
                       "hold_action": {
                         "action": "more-info"
@@ -130,7 +133,10 @@
                       "show_label": true,
                       "label": "[[[ return states[\"sensor.rechner_power\"].state + \" W\" ]]]",
                       "tap_action": {
-                        "action": "none"
+                        "action": "toggle",
+                        "confirmation": {
+                          "text": "Rechner wirklich schalten?"
+                        }
                       },
                       "hold_action": {
                         "action": "more-info"
@@ -227,7 +233,10 @@
                       "show_label": true,
                       "label": "[[[ return states[\"sensor.nuki_power\"].state + \" W\" ]]]",
                       "tap_action": {
-                        "action": "toggle"
+                        "action": "toggle",
+                        "confirmation": {
+                          "text": "Nuki wirklich schalten?"
+                        }
                       },
                       "hold_action": {
                         "action": "more-info"
@@ -329,7 +338,10 @@
                       "show_label": true,
                       "label": "[[[ return states[\"sensor.bambulab_a1_power\"].state + \" W\" ]]]",
                       "tap_action": {
-                        "action": "toggle"
+                        "action": "toggle",
+                        "confirmation": {
+                          "text": "Bambulab A1 wirklich schalten?"
+                        }
                       },
                       "hold_action": {
                         "action": "more-info"
@@ -426,7 +438,10 @@
                       "show_label": true,
                       "label": "[[[ return states[\"sensor.lelit_power\"].state + \" W\" ]]]",
                       "tap_action": {
-                        "action": "toggle"
+                        "action": "toggle",
+                        "confirmation": {
+                          "text": "Lelit wirklich schalten?"
+                        }
                       },
                       "hold_action": {
                         "action": "more-info"
@@ -523,7 +538,10 @@
                       "show_label": true,
                       "label": "[[[ return states[\"sensor.steckdose_fred_power\"].state + \" W\" ]]]",
                       "tap_action": {
-                        "action": "toggle"
+                        "action": "toggle",
+                        "confirmation": {
+                          "text": "Fred wirklich schalten?"
+                        }
                       },
                       "hold_action": {
                         "action": "more-info"
@@ -620,7 +638,10 @@
                       "show_label": true,
                       "label": "[[[ return states[\"sensor.steckdose_helene_power\"].state + \" W\" ]]]",
                       "tap_action": {
-                        "action": "toggle"
+                        "action": "toggle",
+                        "confirmation": {
+                          "text": "Helene wirklich schalten?"
+                        }
                       },
                       "hold_action": {
                         "action": "more-info"
