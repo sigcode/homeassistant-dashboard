@@ -17,7 +17,7 @@
                 {
                   "type": "custom:better-thermostat-ui-card",
                   "entity": "climate.heizung_buro",
-                  "name": "Heizung B\u00fcro",
+                  "name": "Heizung Büro",
                   "disable_menu": false,
                   "disable_window": true,
                   "eco_temperature": 16,
@@ -297,7 +297,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:snowflake",
-                      "name": "16\u00b0",
+                      "name": "16°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -336,7 +336,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer-low",
-                      "name": "18\u00b0",
+                      "name": "18°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -375,7 +375,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer",
-                      "name": "20\u00b0",
+                      "name": "20°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -414,7 +414,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer-high",
-                      "name": "21\u00b0",
+                      "name": "21°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -453,7 +453,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:fire",
-                      "name": "23\u00b0",
+                      "name": "23°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -505,7 +505,7 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_buro_tagesmodus",
                       "icon": "mdi:weather-sunny",
-                      "name": "[[[ return 'Tag \u00b7 ' + states['input_number.heizung_buero_tag_temperatur'].state + '\u00b0C' ]]]",
+                      "name": "[[[ return 'Tag · ' + states['input_number.heizung_buero_tag_temperatur'].state + '°C' ]]]",
                       "label": "07:00 - 22:00",
                       "show_label": true,
                       "show_state": false,
@@ -643,7 +643,7 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_buro_nachtmodus",
                       "icon": "mdi:weather-night",
-                      "name": "[[[ return 'Nacht \u00b7 ' + states['input_number.heizung_buero_nacht_temperatur'].state + '\u00b0C' ]]]",
+                      "name": "[[[ return 'Nacht · ' + states['input_number.heizung_buero_nacht_temperatur'].state + '°C' ]]]",
                       "label": "22:00 - 07:00",
                       "show_label": true,
                       "show_state": false,
@@ -865,7 +865,7 @@
                       "show_state": true,
                       "show_name": true,
                       "layout": "icon_state_name2nd",
-                      "state_display": "[[[ if (entity.state === 'off') return 'OK'; if (entity.state === 'on') return 'Niedrig!'; return '\u2014'; ]]]",
+                      "state_display": "[[[ if (entity.state === 'off') return 'OK'; if (entity.state === 'on') return 'Niedrig!'; return '—'; ]]]",
                       "styles": {
                         "card": [
                           {
@@ -1064,7 +1064,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:snowflake",
-                      "name": "16\u00b0",
+                      "name": "16°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -1103,7 +1103,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer-low",
-                      "name": "18\u00b0",
+                      "name": "18°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -1142,7 +1142,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer",
-                      "name": "20\u00b0",
+                      "name": "20°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -1181,7 +1181,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer-high",
-                      "name": "21\u00b0",
+                      "name": "21°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -1220,7 +1220,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:fire",
-                      "name": "23\u00b0",
+                      "name": "23°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -1272,7 +1272,7 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_bad_tagesmodus",
                       "icon": "mdi:weather-sunny",
-                      "name": "[[[ return 'Tag \u00b7 ' + states['input_number.heizung_bad_tag_temperatur'].state + '\u00b0C' ]]]",
+                      "name": "[[[ return 'Tag · ' + states['input_number.heizung_bad_tag_temperatur'].state + '°C' ]]]",
                       "label": "07:00 - 22:00",
                       "show_label": true,
                       "show_state": false,
@@ -1410,7 +1410,7 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_bad_nachtmodus",
                       "icon": "mdi:weather-night",
-                      "name": "[[[ return 'Nacht \u00b7 ' + states['input_number.heizung_bad_nacht_temperatur'].state + '\u00b0C' ]]]",
+                      "name": "[[[ return 'Nacht · ' + states['input_number.heizung_bad_nacht_temperatur'].state + '°C' ]]]",
                       "label": "22:00 - 07:00",
                       "show_label": true,
                       "show_state": false,
@@ -1632,7 +1632,7 @@
                       "show_state": true,
                       "show_name": true,
                       "layout": "icon_state_name2nd",
-                      "state_display": "[[[ if (entity.state === 'off') return 'OK'; if (entity.state === 'on') return 'Niedrig!'; return '\u2014'; ]]]",
+                      "state_display": "[[[ if (entity.state === 'off') return 'OK'; if (entity.state === 'on') return 'Niedrig!'; return '—'; ]]]",
                       "styles": {
                         "card": [
                           {
@@ -1831,7 +1831,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:snowflake",
-                      "name": "16\u00b0",
+                      "name": "16°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -1870,7 +1870,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer-low",
-                      "name": "18\u00b0",
+                      "name": "18°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -1909,7 +1909,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer",
-                      "name": "20\u00b0",
+                      "name": "20°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -1948,7 +1948,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer-high",
-                      "name": "21\u00b0",
+                      "name": "21°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -1987,7 +1987,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:fire",
-                      "name": "23\u00b0",
+                      "name": "23°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -2039,7 +2039,7 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_waschraum_tagesmodus",
                       "icon": "mdi:weather-sunny",
-                      "name": "[[[ return 'Tag \u00b7 ' + states['input_number.heizung_waschraum_tag_temperatur'].state + '\u00b0C' ]]]",
+                      "name": "[[[ return 'Tag · ' + states['input_number.heizung_waschraum_tag_temperatur'].state + '°C' ]]]",
                       "label": "07:00 - 22:00",
                       "show_label": true,
                       "show_state": false,
@@ -2177,7 +2177,7 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_waschraum_nachtmodus",
                       "icon": "mdi:weather-night",
-                      "name": "[[[ return 'Nacht \u00b7 ' + states['input_number.heizung_waschraum_nacht_temperatur'].state + '\u00b0C' ]]]",
+                      "name": "[[[ return 'Nacht · ' + states['input_number.heizung_waschraum_nacht_temperatur'].state + '°C' ]]]",
                       "label": "22:00 - 07:00",
                       "show_label": true,
                       "show_state": false,
@@ -2318,7 +2318,7 @@
                 {
                   "type": "custom:better-thermostat-ui-card",
                   "entity": "climate.heizung_kuche_m",
-                  "name": "Heizung K\u00fcche",
+                  "name": "Heizung Küche",
                   "disable_menu": false,
                   "disable_window": true,
                   "eco_temperature": 16,
@@ -2335,7 +2335,7 @@
                       "show_state": true,
                       "show_name": true,
                       "layout": "icon_state_name2nd",
-                      "state_display": "[[[ return entity.attributes.current_temperature + '\u00b0C' ]]]",
+                      "state_display": "[[[ return entity.attributes.current_temperature + '°C' ]]]",
                       "tap_action": {
                         "action": "more-info"
                       },
@@ -2402,7 +2402,7 @@
                       "show_state": true,
                       "show_name": true,
                       "layout": "icon_state_name2nd",
-                      "state_display": "[[[ return entity.attributes.current_temperature + '\u00b0C' ]]]",
+                      "state_display": "[[[ return entity.attributes.current_temperature + '°C' ]]]",
                       "tap_action": {
                         "action": "more-info"
                       },
@@ -2469,7 +2469,7 @@
                       "show_state": true,
                       "show_name": true,
                       "layout": "icon_state_name2nd",
-                      "state_display": "[[[ return entity.attributes.current_temperature + '\u00b0C' ]]]",
+                      "state_display": "[[[ return entity.attributes.current_temperature + '°C' ]]]",
                       "tap_action": {
                         "action": "more-info"
                       },
@@ -2627,13 +2627,13 @@
                   "cards": [
                     {
                       "type": "custom:button-card",
-                      "entity": "sensor.heizung_kuche_l_pi_heating_demand",
-                      "icon": "mdi:valve",
+                      "entity": "climate.heizung_kuche_l",
+                      "icon": "[[[ return states['climate.heizung_kuche_l'].attributes.hvac_action === 'heating' ? 'mdi:fire' : 'mdi:snowflake' ]]]",
                       "name": "L",
                       "show_state": true,
                       "show_name": true,
                       "layout": "icon_state_name2nd",
-                      "state_display": "[[[ return Math.round(entity.state) + '%' ]]]",
+                      "state_display": "[[[ return states['climate.heizung_kuche_l'].attributes.hvac_action === 'heating' ? 'Heizen' : 'Idle' ]]]",
                       "tap_action": {
                         "action": "more-info"
                       },
@@ -2665,7 +2665,7 @@
                             "width": "20px"
                           },
                           {
-                            "color": "var(--primary-color)"
+                            "color": "[[[ return states['climate.heizung_kuche_l'].attributes.hvac_action === 'heating' ? 'var(--error-color)' : 'var(--info-color)' ]]]"
                           }
                         ],
                         "state": [
@@ -2694,13 +2694,13 @@
                     },
                     {
                       "type": "custom:button-card",
-                      "entity": "sensor.heizung_kuche_m_pi_heating_demand",
-                      "icon": "mdi:valve",
+                      "entity": "climate.heizung_kuche_m",
+                      "icon": "[[[ return states['climate.heizung_kuche_m'].attributes.hvac_action === 'heating' ? 'mdi:fire' : 'mdi:snowflake' ]]]",
                       "name": "M",
                       "show_state": true,
                       "show_name": true,
                       "layout": "icon_state_name2nd",
-                      "state_display": "[[[ return Math.round(entity.state) + '%' ]]]",
+                      "state_display": "[[[ return states['climate.heizung_kuche_m'].attributes.hvac_action === 'heating' ? 'Heizen' : 'Idle' ]]]",
                       "tap_action": {
                         "action": "more-info"
                       },
@@ -2732,7 +2732,7 @@
                             "width": "20px"
                           },
                           {
-                            "color": "var(--primary-color)"
+                            "color": "[[[ return states['climate.heizung_kuche_m'].attributes.hvac_action === 'heating' ? 'var(--error-color)' : 'var(--info-color)' ]]]"
                           }
                         ],
                         "state": [
@@ -2761,13 +2761,13 @@
                     },
                     {
                       "type": "custom:button-card",
-                      "entity": "sensor.heizung_kuche_r_pi_heating_demand",
-                      "icon": "mdi:valve",
+                      "entity": "climate.heizung_kuche_r",
+                      "icon": "[[[ return states['climate.heizung_kuche_r'].attributes.hvac_action === 'heating' ? 'mdi:fire' : 'mdi:snowflake' ]]]",
                       "name": "R",
                       "show_state": true,
                       "show_name": true,
                       "layout": "icon_state_name2nd",
-                      "state_display": "[[[ return Math.round(entity.state) + '%' ]]]",
+                      "state_display": "[[[ return states['climate.heizung_kuche_r'].attributes.hvac_action === 'heating' ? 'Heizen' : 'Idle' ]]]",
                       "tap_action": {
                         "action": "more-info"
                       },
@@ -2799,7 +2799,7 @@
                             "width": "20px"
                           },
                           {
-                            "color": "var(--primary-color)"
+                            "color": "[[[ return states['climate.heizung_kuche_r'].attributes.hvac_action === 'heating' ? 'var(--error-color)' : 'var(--info-color)' ]]]"
                           }
                         ],
                         "state": [
@@ -2892,7 +2892,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:snowflake",
-                      "name": "16\u00b0",
+                      "name": "16°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -2935,7 +2935,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer-low",
-                      "name": "18\u00b0",
+                      "name": "18°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -2978,7 +2978,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer",
-                      "name": "20\u00b0",
+                      "name": "20°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -3021,7 +3021,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer-high",
-                      "name": "21\u00b0",
+                      "name": "21°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -3064,7 +3064,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:fire",
-                      "name": "23\u00b0",
+                      "name": "23°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -3120,7 +3120,7 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_kuche_tagesmodus",
                       "icon": "mdi:weather-sunny",
-                      "name": "[[[ return 'Tag \u00b7 ' + states['input_number.heizung_kueche_tag_temperatur'].state + '\u00b0C' ]]]",
+                      "name": "[[[ return 'Tag · ' + states['input_number.heizung_kueche_tag_temperatur'].state + '°C' ]]]",
                       "label": "07:00 - 22:00",
                       "show_label": true,
                       "show_state": false,
@@ -3258,7 +3258,7 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_kuche_nachtmodus",
                       "icon": "mdi:weather-night",
-                      "name": "[[[ return 'Nacht \u00b7 ' + states['input_number.heizung_kueche_nacht_temperatur'].state + '\u00b0C' ]]]",
+                      "name": "[[[ return 'Nacht · ' + states['input_number.heizung_kueche_nacht_temperatur'].state + '°C' ]]]",
                       "label": "22:00 - 07:00",
                       "show_label": true,
                       "show_state": false,
@@ -3416,7 +3416,7 @@
                       "show_state": true,
                       "show_name": true,
                       "layout": "icon_state_name2nd",
-                      "state_display": "[[[ return entity.attributes.current_temperature + '\u00b0C' ]]]",
+                      "state_display": "[[[ return entity.attributes.current_temperature + '°C' ]]]",
                       "tap_action": {
                         "action": "more-info"
                       },
@@ -3483,7 +3483,7 @@
                       "show_state": true,
                       "show_name": true,
                       "layout": "icon_state_name2nd",
-                      "state_display": "[[[ return entity.attributes.current_temperature + '\u00b0C' ]]]",
+                      "state_display": "[[[ return entity.attributes.current_temperature + '°C' ]]]",
                       "tap_action": {
                         "action": "more-info"
                       },
@@ -3641,13 +3641,13 @@
                   "cards": [
                     {
                       "type": "custom:button-card",
-                      "entity": "sensor.heizung_sauna_l_pi_heating_demand",
-                      "icon": "mdi:valve",
+                      "entity": "climate.heizung_sauna_l",
+                      "icon": "[[[ return states['climate.heizung_sauna_l'].attributes.hvac_action === 'heating' ? 'mdi:fire' : 'mdi:snowflake' ]]]",
                       "name": "L",
                       "show_state": true,
                       "show_name": true,
                       "layout": "icon_state_name2nd",
-                      "state_display": "[[[ return Math.round(entity.state) + '%' ]]]",
+                      "state_display": "[[[ return states['climate.heizung_sauna_l'].attributes.hvac_action === 'heating' ? 'Heizen' : 'Idle' ]]]",
                       "tap_action": {
                         "action": "more-info"
                       },
@@ -3679,7 +3679,7 @@
                             "width": "20px"
                           },
                           {
-                            "color": "var(--primary-color)"
+                            "color": "[[[ return states['climate.heizung_sauna_l'].attributes.hvac_action === 'heating' ? 'var(--error-color)' : 'var(--info-color)' ]]]"
                           }
                         ],
                         "state": [
@@ -3708,13 +3708,13 @@
                     },
                     {
                       "type": "custom:button-card",
-                      "entity": "sensor.heizung_sauna_r_pi_heating_demand",
-                      "icon": "mdi:valve",
+                      "entity": "climate.heizung_sauna_r",
+                      "icon": "[[[ return states['climate.heizung_sauna_r'].attributes.hvac_action === 'heating' ? 'mdi:fire' : 'mdi:snowflake' ]]]",
                       "name": "R",
                       "show_state": true,
                       "show_name": true,
                       "layout": "icon_state_name2nd",
-                      "state_display": "[[[ return Math.round(entity.state) + '%' ]]]",
+                      "state_display": "[[[ return states['climate.heizung_sauna_r'].attributes.hvac_action === 'heating' ? 'Heizen' : 'Idle' ]]]",
                       "tap_action": {
                         "action": "more-info"
                       },
@@ -3746,7 +3746,7 @@
                             "width": "20px"
                           },
                           {
-                            "color": "var(--primary-color)"
+                            "color": "[[[ return states['climate.heizung_sauna_r'].attributes.hvac_action === 'heating' ? 'var(--error-color)' : 'var(--info-color)' ]]]"
                           }
                         ],
                         "state": [
@@ -3832,7 +3832,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:snowflake",
-                      "name": "16\u00b0",
+                      "name": "16°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -3874,7 +3874,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer-low",
-                      "name": "18\u00b0",
+                      "name": "18°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -3916,7 +3916,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer",
-                      "name": "20\u00b0",
+                      "name": "20°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -3958,7 +3958,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:thermometer-high",
-                      "name": "21\u00b0",
+                      "name": "21°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -4000,7 +4000,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:fire",
-                      "name": "23\u00b0",
+                      "name": "23°",
                       "tap_action": {
                         "action": "call-service",
                         "service": "climate.set_temperature",
@@ -4055,7 +4055,7 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_sauna_tagesmodus",
                       "icon": "mdi:weather-sunny",
-                      "name": "[[[ return 'Tag \u00b7 ' + states['input_number.heizung_sauna_tag_temperatur'].state + '\u00b0C' ]]]",
+                      "name": "[[[ return 'Tag · ' + states['input_number.heizung_sauna_tag_temperatur'].state + '°C' ]]]",
                       "label": "07:00 - 22:00",
                       "show_label": true,
                       "show_state": false,
@@ -4193,7 +4193,7 @@
                       "type": "custom:button-card",
                       "entity": "automation.heizung_sauna_nachtmodus",
                       "icon": "mdi:weather-night",
-                      "name": "[[[ return 'Nacht \u00b7 ' + states['input_number.heizung_sauna_nacht_temperatur'].state + '\u00b0C' ]]]",
+                      "name": "[[[ return 'Nacht · ' + states['input_number.heizung_sauna_nacht_temperatur'].state + '°C' ]]]",
                       "label": "22:00 - 07:00",
                       "show_label": true,
                       "show_state": false,
@@ -4333,7 +4333,7 @@
               "cards": [
                 {
                   "type": "markdown",
-                  "content": "### \ud83c\udf21\ufe0f Heizung Zeitplan",
+                  "content": "### 🌡️ Heizung Zeitplan",
                   "card_mod": {
                     "style": "ha-card { background: transparent; box-shadow: none; padding: 8px 0 0 0; }"
                   }
@@ -4501,7 +4501,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:desktop-tower-monitor",
-                      "name": "B\u00fcro",
+                      "name": "Büro",
                       "show_state": false,
                       "styles": {
                         "card": [
@@ -4864,7 +4864,7 @@
                     {
                       "type": "custom:button-card",
                       "icon": "mdi:stove",
-                      "name": "K\u00fcche",
+                      "name": "Küche",
                       "show_state": false,
                       "styles": {
                         "card": [
@@ -5102,7 +5102,7 @@
                 },
                 {
                   "type": "markdown",
-                  "content": "\u23f0 **Tag** 07:00 - 22:00 \u00b7 **Nacht** 22:00 - 07:00",
+                  "content": "⏰ **Tag** 07:00 - 22:00 · **Nacht** 22:00 - 07:00",
                   "card_mod": {
                     "style": "ha-card { background: transparent; box-shadow: none; padding: 4px 0 0 0; text-align: center; } ha-markdown p { font-size: 11px; color: var(--secondary-text-color); margin: 0; }"
                   }
