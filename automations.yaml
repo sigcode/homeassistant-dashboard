@@ -410,6 +410,137 @@
       data:
         value: "{{ states('input_number.heizung_alle_nacht_temperatur') | float }}"
 
+# Interne Thermostat-Schedules synchronisieren (Avatto TRV06_1)
+- id: heizung_kueche_schedule_sync
+  alias: "Heizung Küche - Interne Schedules Sync"
+  description: "Synchronisiert die internen Thermostat-Schedules mit den HA-Einstellungen"
+  trigger:
+    - platform: state
+      entity_id:
+        - input_number.heizung_kueche_tag_temperatur
+        - input_number.heizung_kueche_nacht_temperatur
+    - platform: homeassistant
+      event: start
+  action:
+    - variables:
+        tag_temp: "{{ states('input_number.heizung_kueche_tag_temperatur') | int }}"
+        nacht_temp: "{{ states('input_number.heizung_kueche_nacht_temperatur') | int }}"
+        schedule: "00:00/{{ nacht_temp }} 07:00/{{ tag_temp }} 12:00/{{ tag_temp }} 16:00/{{ tag_temp }} 20:00/{{ tag_temp }} 22:00/{{ nacht_temp }}"
+    - service: mqtt.publish
+      data:
+        topic: "zigbee2mqtt/Heizung Küche L/set"
+        payload: >
+          {"schedule_monday": "{{ schedule }}", "schedule_tuesday": "{{ schedule }}", "schedule_wednesday": "{{ schedule }}", "schedule_thursday": "{{ schedule }}", "schedule_friday": "{{ schedule }}", "schedule_saturday": "{{ schedule }}", "schedule_sunday": "{{ schedule }}"}
+    - delay:
+        milliseconds: 500
+    - service: mqtt.publish
+      data:
+        topic: "zigbee2mqtt/Heizung Küche M/set"
+        payload: >
+          {"schedule_monday": "{{ schedule }}", "schedule_tuesday": "{{ schedule }}", "schedule_wednesday": "{{ schedule }}", "schedule_thursday": "{{ schedule }}", "schedule_friday": "{{ schedule }}", "schedule_saturday": "{{ schedule }}", "schedule_sunday": "{{ schedule }}"}
+    - delay:
+        milliseconds: 500
+    - service: mqtt.publish
+      data:
+        topic: "zigbee2mqtt/Heizung Küche R/set"
+        payload: >
+          {"schedule_monday": "{{ schedule }}", "schedule_tuesday": "{{ schedule }}", "schedule_wednesday": "{{ schedule }}", "schedule_thursday": "{{ schedule }}", "schedule_friday": "{{ schedule }}", "schedule_saturday": "{{ schedule }}", "schedule_sunday": "{{ schedule }}"}
+  mode: single
+
+- id: heizung_sauna_schedule_sync
+  alias: "Heizung Sauna - Interne Schedules Sync"
+  description: "Synchronisiert die internen Thermostat-Schedules mit den HA-Einstellungen"
+  trigger:
+    - platform: state
+      entity_id:
+        - input_number.heizung_sauna_tag_temperatur
+        - input_number.heizung_sauna_nacht_temperatur
+    - platform: homeassistant
+      event: start
+  action:
+    - variables:
+        tag_temp: "{{ states('input_number.heizung_sauna_tag_temperatur') | int }}"
+        nacht_temp: "{{ states('input_number.heizung_sauna_nacht_temperatur') | int }}"
+        schedule: "00:00/{{ nacht_temp }} 07:00/{{ tag_temp }} 12:00/{{ tag_temp }} 16:00/{{ tag_temp }} 20:00/{{ tag_temp }} 22:00/{{ nacht_temp }}"
+    - service: mqtt.publish
+      data:
+        topic: "zigbee2mqtt/Heizung Sauna L/set"
+        payload: >
+          {"schedule_monday": "{{ schedule }}", "schedule_tuesday": "{{ schedule }}", "schedule_wednesday": "{{ schedule }}", "schedule_thursday": "{{ schedule }}", "schedule_friday": "{{ schedule }}", "schedule_saturday": "{{ schedule }}", "schedule_sunday": "{{ schedule }}"}
+    - delay:
+        milliseconds: 500
+    - service: mqtt.publish
+      data:
+        topic: "zigbee2mqtt/Heizung Sauna R/set"
+        payload: >
+          {"schedule_monday": "{{ schedule }}", "schedule_tuesday": "{{ schedule }}", "schedule_wednesday": "{{ schedule }}", "schedule_thursday": "{{ schedule }}", "schedule_friday": "{{ schedule }}", "schedule_saturday": "{{ schedule }}", "schedule_sunday": "{{ schedule }}"}
+  mode: single
+
+- id: heizung_buero_schedule_sync
+  alias: "Heizung Büro - Interne Schedules Sync"
+  description: "Synchronisiert die internen Thermostat-Schedules mit den HA-Einstellungen"
+  trigger:
+    - platform: state
+      entity_id:
+        - input_number.heizung_buero_tag_temperatur
+        - input_number.heizung_buero_nacht_temperatur
+    - platform: homeassistant
+      event: start
+  action:
+    - variables:
+        tag_temp: "{{ states('input_number.heizung_buero_tag_temperatur') | int }}"
+        nacht_temp: "{{ states('input_number.heizung_buero_nacht_temperatur') | int }}"
+        schedule: "00:00/{{ nacht_temp }} 07:00/{{ tag_temp }} 12:00/{{ tag_temp }} 16:00/{{ tag_temp }} 20:00/{{ tag_temp }} 22:00/{{ nacht_temp }}"
+    - service: mqtt.publish
+      data:
+        topic: "zigbee2mqtt/Heizung Büro/set"
+        payload: >
+          {"schedule_monday": "{{ schedule }}", "schedule_tuesday": "{{ schedule }}", "schedule_wednesday": "{{ schedule }}", "schedule_thursday": "{{ schedule }}", "schedule_friday": "{{ schedule }}", "schedule_saturday": "{{ schedule }}", "schedule_sunday": "{{ schedule }}"}
+  mode: single
+
+- id: heizung_bad_schedule_sync
+  alias: "Heizung Bad - Interne Schedules Sync"
+  description: "Synchronisiert die internen Thermostat-Schedules mit den HA-Einstellungen"
+  trigger:
+    - platform: state
+      entity_id:
+        - input_number.heizung_bad_tag_temperatur
+        - input_number.heizung_bad_nacht_temperatur
+    - platform: homeassistant
+      event: start
+  action:
+    - variables:
+        tag_temp: "{{ states('input_number.heizung_bad_tag_temperatur') | int }}"
+        nacht_temp: "{{ states('input_number.heizung_bad_nacht_temperatur') | int }}"
+        schedule: "00:00/{{ nacht_temp }} 07:00/{{ tag_temp }} 12:00/{{ tag_temp }} 16:00/{{ tag_temp }} 20:00/{{ tag_temp }} 22:00/{{ nacht_temp }}"
+    - service: mqtt.publish
+      data:
+        topic: "zigbee2mqtt/Heizung Bad/set"
+        payload: >
+          {"schedule_monday": "{{ schedule }}", "schedule_tuesday": "{{ schedule }}", "schedule_wednesday": "{{ schedule }}", "schedule_thursday": "{{ schedule }}", "schedule_friday": "{{ schedule }}", "schedule_saturday": "{{ schedule }}", "schedule_sunday": "{{ schedule }}"}
+  mode: single
+
+- id: heizung_waschraum_schedule_sync
+  alias: "Heizung Waschraum - Interne Schedules Sync"
+  description: "Synchronisiert die internen Thermostat-Schedules mit den HA-Einstellungen"
+  trigger:
+    - platform: state
+      entity_id:
+        - input_number.heizung_waschraum_tag_temperatur
+        - input_number.heizung_waschraum_nacht_temperatur
+    - platform: homeassistant
+      event: start
+  action:
+    - variables:
+        tag_temp: "{{ states('input_number.heizung_waschraum_tag_temperatur') | int }}"
+        nacht_temp: "{{ states('input_number.heizung_waschraum_nacht_temperatur') | int }}"
+        schedule: "00:00/{{ nacht_temp }} 07:00/{{ tag_temp }} 12:00/{{ tag_temp }} 16:00/{{ tag_temp }} 20:00/{{ tag_temp }} 22:00/{{ nacht_temp }}"
+    - service: mqtt.publish
+      data:
+        topic: "zigbee2mqtt/Heizung Waschraum/set"
+        payload: >
+          {"schedule_monday": "{{ schedule }}", "schedule_tuesday": "{{ schedule }}", "schedule_wednesday": "{{ schedule }}", "schedule_thursday": "{{ schedule }}", "schedule_friday": "{{ schedule }}", "schedule_saturday": "{{ schedule }}", "schedule_sunday": "{{ schedule }}"}
+  mode: single
 
 - id: 'fritz_auto_reload'
   alias: 'Fritz!Box Integration Auto-Reload'
