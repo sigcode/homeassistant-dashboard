@@ -5,15 +5,6 @@
   "data": {
     "items": [
       {
-        "id": "map",
-        "icon": "mdi:map",
-        "title": "Karte",
-        "url_path": "map",
-        "show_in_sidebar": true,
-        "require_admin": false,
-        "mode": "storage"
-      },
-      {
         "id": "heizung",
         "icon": "mdi:radiator",
         "title": "Heizung",

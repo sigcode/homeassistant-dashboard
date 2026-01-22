@@ -170,6 +170,28 @@ template:
           {% set current = states('sensor.fritz_box_7530_ax_upload_durchsatz') | float(0) * 8 %}
           {% set max = states('sensor.fritz_box_7530_ax_maximaler_upload_durchsatz_der_verbindung') | float(1) %}
           {{ ((current / max) * 100) | round(1) }}
+      # Aggregierte Temperaturen für Räume mit mehreren Thermostaten
+      - name: "Heizung Küche Temperatur"
+        unique_id: heizung_kueche_temperatur_avg
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: >
+          {% set temps = [
+            state_attr('climate.heizung_kuche_l', 'current_temperature'),
+            state_attr('climate.heizung_kuche_m', 'current_temperature'),
+            state_attr('climate.heizung_kuche_r', 'current_temperature')
+          ] | reject('none') | list %}
+          {{ (temps | sum / temps | count) | round(1) if temps else 'unavailable' }}
+      - name: "Heizung Sauna Temperatur"
+        unique_id: heizung_sauna_temperatur_avg
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: >
+          {% set temps = [
+            state_attr('climate.heizung_sauna_l', 'current_temperature'),
+            state_attr('climate.heizung_sauna_r', 'current_temperature')
+          ] | reject('none') | list %}
+          {{ (temps | sum / temps | count) | round(1) if temps else 'unavailable' }}
 
 # Energie-Sensoren für Zigbee Steckdosen (berechnet aus Leistung)
 sensor:

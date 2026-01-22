@@ -11,6 +11,96 @@
           "type": "masonry",
           "cards": [
             {
+              "type": "horizontal-stack",
+              "cards": [
+                {
+                  "type": "custom:button-card",
+                  "icon": "mdi:home",
+                  "name": "Home",
+                  "show_state": false,
+                  "show_name": true,
+                  "show_icon": true,
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/0"
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "background": "var(--card-background-color)"
+                      },
+                      {
+                        "padding": "12px"
+                      },
+                      {
+                        "border-radius": "12px"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "width": "24px"
+                      },
+                      {
+                        "color": "var(--primary-color)"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-size": "12px"
+                      },
+                      {
+                        "margin-top": "4px"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "icon": "mdi:power-socket-de",
+                  "name": "Steckdosen",
+                  "show_state": false,
+                  "show_name": true,
+                  "show_icon": true,
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/steckdosen/0"
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "background": "var(--card-background-color)"
+                      },
+                      {
+                        "padding": "12px"
+                      },
+                      {
+                        "border-radius": "12px"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "width": "24px"
+                      },
+                      {
+                        "color": "var(--primary-color)"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-size": "12px"
+                      },
+                      {
+                        "margin-top": "4px"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "card_mod": {
+                "style": "\n              :host {\n                display: none !important;\n              }\n              @media (max-width: 768px) {\n                :host {\n                  display: block !important;\n                }\n              }\n            "
+              }
+            },
+            {
               "type": "custom:stack-in-card",
               "mode": "vertical",
               "cards": [
@@ -2325,6 +2415,53 @@
                   "set_current_as_main": true
                 },
                 {
+                  "type": "custom:button-card",
+                  "entity": "sensor.heizung_kuche_temperatur",
+                  "show_icon": true,
+                  "show_name": true,
+                  "show_state": true,
+                  "icon": "mdi:thermometer",
+                  "name": "Ø Raumtemperatur (3 Thermostate)",
+                  "layout": "icon_name_state",
+                  "styles": {
+                    "card": [
+                      {
+                        "background": "rgba(var(--rgb-primary-color), 0.1)"
+                      },
+                      {
+                        "padding": "8px"
+                      },
+                      {
+                        "border-radius": "8px"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "width": "20px"
+                      },
+                      {
+                        "color": "var(--primary-color)"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-size": "12px"
+                      },
+                      {
+                        "color": "var(--secondary-text-color)"
+                      }
+                    ],
+                    "state": [
+                      {
+                        "font-size": "16px"
+                      },
+                      {
+                        "font-weight": "bold"
+                      }
+                    ]
+                  }
+                },
+                {
                   "type": "horizontal-stack",
                   "cards": [
                     {
@@ -3404,6 +3541,53 @@
                   "disable_window": true,
                   "eco_temperature": 16,
                   "set_current_as_main": true
+                },
+                {
+                  "type": "custom:button-card",
+                  "entity": "sensor.heizung_sauna_temperatur",
+                  "show_icon": true,
+                  "show_name": true,
+                  "show_state": true,
+                  "icon": "mdi:thermometer",
+                  "name": "Ø Raumtemperatur (2 Thermostate)",
+                  "layout": "icon_name_state",
+                  "styles": {
+                    "card": [
+                      {
+                        "background": "rgba(var(--rgb-primary-color), 0.1)"
+                      },
+                      {
+                        "padding": "8px"
+                      },
+                      {
+                        "border-radius": "8px"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "width": "20px"
+                      },
+                      {
+                        "color": "var(--primary-color)"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-size": "12px"
+                      },
+                      {
+                        "color": "var(--secondary-text-color)"
+                      }
+                    ],
+                    "state": [
+                      {
+                        "font-size": "16px"
+                      },
+                      {
+                        "font-weight": "bold"
+                      }
+                    ]
+                  }
                 },
                 {
                   "type": "horizontal-stack",
