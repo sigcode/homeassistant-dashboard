@@ -5,6 +5,11 @@ http:
     - 10.0.0.1
 
 # Loads default set of integrations. Do not remove.
+# Sungrow SH10RT Modbus Integration
+homeassistant:
+  packages:
+    modbus_sungrow: !include integrations/modbus_sungrow.yaml
+
 default_config:
 
 # Load frontend themes from the themes folder

@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.pv",
+  "data": {
+    "config": {
+      "title": "PV System",
+      "views": [
+        {
+          "title": "Energie",
+          "path": "energy",
+          "icon": "mdi:solar-power",
+          "type": "sections",
+          "badges": [
+            {
+              "type": "entity",
+              "show_name": true,
+              "show_state": true,
+              "show_icon": true,
+              "entity": "sensor.battery_level",
+              "name": "Batterie"
+            }
+          ],
+          "sections": [
+            {
+              "type": "grid",
+              "title": "Energiefluss",
+              "cards": [
+                {
+                  "type": "energy-distribution"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.daily_pv_generation",
+                  "name": "PV Erzeugung heute",
+                  "icon": "mdi:solar-power-variant",
+                  "color": "amber"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.daily_consumed_energy",
+                  "name": "Verbrauch heute",
+                  "icon": "mdi:home-lightning-bolt",
+                  "color": "blue"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.daily_imported_energy",
+                  "name": "Netzbezug heute",
+                  "icon": "mdi:transmission-tower-import",
+                  "color": "red"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.daily_exported_energy",
+                  "name": "Einspeisung heute",
+                  "icon": "mdi:transmission-tower-export",
+                  "color": "green"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.daily_battery_charge",
+                  "name": "Batterie geladen",
+                  "icon": "mdi:battery-plus-variant",
+                  "color": "teal"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.daily_battery_discharge",
+                  "name": "Batterie entladen",
+                  "icon": "mdi:battery-minus-variant",
+                  "color": "orange"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "title": "Aktuelle Leistung",
+              "cards": [
+                {
+                  "graph": "line",
+                  "type": "sensor",
+                  "entity": "sensor.total_dc_power",
+                  "detail": 2,
+                  "name": "PV Erzeugung",
+                  "icon": "mdi:solar-power-variant",
+                  "layout_options": {
+                    "grid_columns": "full"
+                  }
+                },
+                {
+                  "graph": "line",
+                  "type": "sensor",
+                  "entity": "sensor.load_power",
+                  "detail": 2,
+                  "name": "Hausverbrauch",
+                  "icon": "mdi:home"
+                },
+                {
+                  "graph": "line",
+                  "type": "sensor",
+                  "entity": "sensor.battery_power",
+                  "detail": 2,
+                  "name": "Batterie",
+                  "icon": "mdi:battery-charging"
+                },
+                {
+                  "graph": "line",
+                  "type": "sensor",
+                  "entity": "sensor.import_power",
+                  "detail": 2,
+                  "name": "Netzbezug",
+                  "icon": "mdi:transmission-tower-import"
+                },
+                {
+                  "graph": "line",
+                  "type": "sensor",
+                  "entity": "sensor.export_power",
+                  "detail": 2,
+                  "name": "Einspeisung",
+                  "icon": "mdi:transmission-tower-export"
+                },
+                {
+                  "type": "gauge",
+                  "entity": "sensor.battery_level",
+                  "name": "Batterie",
+                  "min": 0,
+                  "max": 100,
+                  "severity": {
+                    "green": 70,
+                    "yellow": 40,
+                    "red": 20
+                  },
+                  "layout_options": {
+                    "grid_columns": 2,
+                    "grid_rows": 2
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

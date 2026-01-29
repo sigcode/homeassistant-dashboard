@@ -21,6 +21,15 @@
         "show_in_sidebar": true,
         "require_admin": false,
         "mode": "storage"
+      },
+      {
+        "id": "pv",
+        "icon": "mdi:solar-power",
+        "title": "PV",
+        "url_path": "pv",
+        "show_in_sidebar": true,
+        "require_admin": false,
+        "mode": "storage"
       }
     ]
   }
