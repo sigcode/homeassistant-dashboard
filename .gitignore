@@ -3,7 +3,9 @@ secrets.yaml
 .storage/auth
 .storage/auth_provider.homeassistant
 .storage/http.auth
+.storage/http
 .storage/onboarding
+.storage/core.uuid
 
 # Database & logs
 *.db
@@ -24,8 +26,37 @@ tts/
 *.tar.gz
 
 # HACS (managed separately)
-custom_components/hacs/
+custom_components/
+www/
 
 # Backups
 backups/
 *.bak
+
+# HA runtime & internal state
+.HA_VERSION
+.ha_run.lock
+.storage/core.restore_state
+.storage/core.analytics
+.storage/core.area_registry
+.storage/core.config
+.storage/core.config_entries
+.storage/core.device_registry
+.storage/core.entity_registry
+.storage/assist_pipeline.pipelines
+.storage/bluetooth.*
+.storage/hacs.*
+.storage/hassio
+.storage/homeassistant.exposed_entities
+.storage/image
+.storage/mobile_app
+.storage/person
+.storage/repairs.issue_registry
+.storage/trace.saved_traces
+.storage/roborock/
+.storage/browser_mod.storage
+.storage/map
+.storage/lovelace.backup
+.storage/frontend.*
+blueprints/
+image/

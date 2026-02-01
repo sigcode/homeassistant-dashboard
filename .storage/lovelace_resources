@@ -33,6 +33,11 @@
         "id": "658055abd6d24f1692a9e6a08e0522ed",
         "url": "/browser_mod.js?automatically-added&2.7.0",
         "type": "module"
+      },
+      {
+        "id": "32e27bbeee8e45aea8f34240233f5abf",
+        "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524410",
+        "type": "module"
       }
     ]
   }
