@@ -38,6 +38,11 @@
         "id": "32e27bbeee8e45aea8f34240233f5abf",
         "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524410",
         "type": "module"
+      },
+      {
+        "id": "power-flow-card-plus",
+        "type": "module",
+        "url": "/local/community/power-flow-card-plus/power-flow-card-plus.js"
       }
     ]
   }

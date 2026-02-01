@@ -24,10 +24,41 @@
           "sections": [
             {
               "type": "grid",
-              "title": "Energiefluss",
+              "title": "Energiefluss (Echtzeit)",
               "cards": [
                 {
-                  "type": "energy-distribution"
+                  "type": "custom:power-flow-card-plus",
+                  "entities": {
+                    "solar": {
+                      "entity": "sensor.total_dc_power",
+                      "display_zero_tolerance": 10,
+                      "name": "PV"
+                    },
+                    "home": {
+                      "entity": "sensor.load_power",
+                      "name": "Zuhause"
+                    },
+                    "grid": {
+                      "entity": {
+                        "consumption": "sensor.import_power",
+                        "production": "sensor.export_power"
+                      },
+                      "name": "Netz"
+                    },
+                    "battery": {
+                      "entity": {
+                        "consumption": "sensor.battery_power",
+                        "production": "sensor.battery_power"
+                      },
+                      "state_of_charge": "sensor.battery_level",
+                      "name": "Batterie"
+                    }
+                  },
+                  "watt_threshold": 0,
+                  "display_zero_lines": {
+                    "mode": "transparency",
+                    "transparency": 50
+                  }
                 },
                 {
                   "type": "tile",
