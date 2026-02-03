@@ -94,6 +94,47 @@
                       }
                     ]
                   }
+                },
+                {
+                  "type": "custom:button-card",
+                  "icon": "mdi:solar-power",
+                  "name": "PV",
+                  "show_state": false,
+                  "show_name": true,
+                  "show_icon": true,
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/pv/energy"
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "background": "var(--card-background-color)"
+                      },
+                      {
+                        "padding": "12px"
+                      },
+                      {
+                        "border-radius": "12px"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "width": "24px"
+                      },
+                      {
+                        "color": "var(--primary-color)"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-size": "12px"
+                      },
+                      {
+                        "margin-top": "4px"
+                      }
+                    ]
+                  }
                 }
               ],
               "card_mod": {
@@ -115,8 +156,8 @@
                       "type": "custom:button-card",
                       "entity": "light.buro_leds",
                       "icon": "mdi:lightbulb-group",
-                      "name": "Büro LEDs",
-                      "label": "TV · Schreibtisch · Wand · Regal",
+                      "name": "B\u00fcro LEDs",
+                      "label": "TV \u00b7 Schreibtisch \u00b7 Wand \u00b7 Regal",
                       "show_label": true,
                       "show_state": false,
                       "tap_action": {
@@ -1685,7 +1726,7 @@
                       "type": "custom:button-card",
                       "entity": "binary_sensor.hoftor",
                       "icon": "mdi:door",
-                      "name": "Tür",
+                      "name": "T\u00fcr",
                       "show_state": false,
                       "tap_action": {
                         "action": "more-info"
@@ -1771,7 +1812,7 @@
                       "type": "custom:button-card",
                       "entity": "lock.hoftor",
                       "icon": "mdi:door-open",
-                      "name": "Öffnen",
+                      "name": "\u00d6ffnen",
                       "show_state": false,
                       "tap_action": {
                         "action": "call-service",
@@ -1781,7 +1822,7 @@
                         }
                       },
                       "confirmation": {
-                        "text": "Tor öffnen?"
+                        "text": "Tor \u00f6ffnen?"
                       },
                       "styles": {
                         "card": [

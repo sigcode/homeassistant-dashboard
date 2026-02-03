@@ -7,167 +7,108 @@
       "title": "PV System",
       "views": [
         {
-          "title": "Energie",
+          "title": "PV",
           "path": "energy",
           "icon": "mdi:solar-power",
-          "type": "sections",
-          "badges": [
+          "type": "masonry",
+          "cards": [
             {
-              "type": "entity",
-              "show_name": true,
-              "show_state": true,
-              "show_icon": true,
-              "entity": "sensor.battery_level",
-              "name": "Batterie"
-            }
-          ],
-          "sections": [
+              "type": "horizontal-stack",
+              "cards": [
+                {
+                  "type": "custom:button-card",
+                  "icon": "mdi:home",
+                  "name": "Home",
+                  "show_state": false,
+                  "show_name": true,
+                  "show_icon": true,
+                  "tap_action": {"action": "navigate", "navigation_path": "/lovelace/0"},
+                  "styles": {
+                    "card": [{"background": "var(--card-background-color)"}, {"padding": "12px"}, {"border-radius": "12px"}],
+                    "icon": [{"width": "24px"}, {"color": "var(--primary-color)"}],
+                    "name": [{"font-size": "12px"}, {"margin-top": "4px"}]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "icon": "mdi:radiator",
+                  "name": "Heizung",
+                  "show_state": false,
+                  "show_name": true,
+                  "show_icon": true,
+                  "tap_action": {"action": "navigate", "navigation_path": "/heizung/0"},
+                  "styles": {
+                    "card": [{"background": "var(--card-background-color)"}, {"padding": "12px"}, {"border-radius": "12px"}],
+                    "icon": [{"width": "24px"}, {"color": "var(--primary-color)"}],
+                    "name": [{"font-size": "12px"}, {"margin-top": "4px"}]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "icon": "mdi:power-socket-de",
+                  "name": "Steckdosen",
+                  "show_state": false,
+                  "show_name": true,
+                  "show_icon": true,
+                  "tap_action": {"action": "navigate", "navigation_path": "/steckdosen/0"},
+                  "styles": {
+                    "card": [{"background": "var(--card-background-color)"}, {"padding": "12px"}, {"border-radius": "12px"}],
+                    "icon": [{"width": "24px"}, {"color": "var(--primary-color)"}],
+                    "name": [{"font-size": "12px"}, {"margin-top": "4px"}]
+                  }
+                }
+              ],
+              "card_mod": {
+                "style": "\n              :host {\n                display: none !important;\n              }\n              @media (max-width: 768px) {\n                :host {\n                  display: block !important;\n                }\n              }\n            "
+              }
+            },
             {
-              "type": "grid",
-              "title": "Energiefluss (Echtzeit)",
+              "type": "vertical-stack",
+              "title": "Energiefluss",
               "cards": [
                 {
                   "type": "custom:power-flow-card-plus",
                   "entities": {
-                    "solar": {
-                      "entity": "sensor.total_dc_power",
-                      "display_zero_tolerance": 10,
-                      "name": "PV"
-                    },
-                    "home": {
-                      "entity": "sensor.load_power",
-                      "name": "Zuhause"
-                    },
-                    "grid": {
-                      "entity": {
-                        "consumption": "sensor.import_power",
-                        "production": "sensor.export_power"
-                      },
-                      "name": "Netz"
-                    },
-                    "battery": {
-                      "entity": {
-                        "consumption": "sensor.battery_power",
-                        "production": "sensor.battery_power"
-                      },
-                      "state_of_charge": "sensor.battery_level",
-                      "name": "Batterie"
-                    }
+                    "solar": {"entity": "sensor.total_dc_power", "display_zero_tolerance": 10, "name": "PV"},
+                    "home": {"entity": "sensor.load_power", "name": "Zuhause"},
+                    "grid": {"entity": {"consumption": "sensor.import_power", "production": "sensor.export_power"}, "name": "Netz"},
+                    "battery": {"entity": {"consumption": "sensor.battery_power", "production": "sensor.battery_power"}, "state_of_charge": "sensor.battery_level", "name": "Batterie"}
                   },
                   "watt_threshold": 0,
-                  "display_zero_lines": {
-                    "mode": "transparency",
-                    "transparency": 50
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.daily_pv_generation",
-                  "name": "PV Erzeugung heute",
-                  "icon": "mdi:solar-power-variant",
-                  "color": "amber"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.daily_consumed_energy",
-                  "name": "Verbrauch heute",
-                  "icon": "mdi:home-lightning-bolt",
-                  "color": "blue"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.daily_imported_energy",
-                  "name": "Netzbezug heute",
-                  "icon": "mdi:transmission-tower-import",
-                  "color": "red"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.daily_exported_energy",
-                  "name": "Einspeisung heute",
-                  "icon": "mdi:transmission-tower-export",
-                  "color": "green"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.daily_battery_charge",
-                  "name": "Batterie geladen",
-                  "icon": "mdi:battery-plus-variant",
-                  "color": "teal"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.daily_battery_discharge",
-                  "name": "Batterie entladen",
-                  "icon": "mdi:battery-minus-variant",
-                  "color": "orange"
+                  "display_zero_lines": {"mode": "transparency", "transparency": 50}
                 }
               ]
             },
             {
-              "type": "grid",
+              "type": "vertical-stack",
+              "title": "Heute",
+              "cards": [
+                {"type": "tile", "entity": "sensor.daily_pv_generation", "name": "PV Erzeugung", "icon": "mdi:solar-power-variant", "color": "amber"},
+                {"type": "tile", "entity": "sensor.daily_consumed_energy", "name": "Verbrauch", "icon": "mdi:home-lightning-bolt", "color": "blue"},
+                {"type": "tile", "entity": "sensor.daily_imported_energy", "name": "Netzbezug", "icon": "mdi:transmission-tower-import", "color": "red"},
+                {"type": "tile", "entity": "sensor.daily_exported_energy", "name": "Einspeisung", "icon": "mdi:transmission-tower-export", "color": "green"},
+                {"type": "tile", "entity": "sensor.daily_battery_charge", "name": "Batterie geladen", "icon": "mdi:battery-plus-variant", "color": "teal"},
+                {"type": "tile", "entity": "sensor.daily_battery_discharge", "name": "Batterie entladen", "icon": "mdi:battery-minus-variant", "color": "orange"}
+              ]
+            },
+            {
+              "type": "vertical-stack",
               "title": "Aktuelle Leistung",
               "cards": [
-                {
-                  "graph": "line",
-                  "type": "sensor",
-                  "entity": "sensor.total_dc_power",
-                  "detail": 2,
-                  "name": "PV Erzeugung",
-                  "icon": "mdi:solar-power-variant",
-                  "layout_options": {
-                    "grid_columns": "full"
-                  }
-                },
-                {
-                  "graph": "line",
-                  "type": "sensor",
-                  "entity": "sensor.load_power",
-                  "detail": 2,
-                  "name": "Hausverbrauch",
-                  "icon": "mdi:home"
-                },
-                {
-                  "graph": "line",
-                  "type": "sensor",
-                  "entity": "sensor.battery_power",
-                  "detail": 2,
-                  "name": "Batterie",
-                  "icon": "mdi:battery-charging"
-                },
-                {
-                  "graph": "line",
-                  "type": "sensor",
-                  "entity": "sensor.import_power",
-                  "detail": 2,
-                  "name": "Netzbezug",
-                  "icon": "mdi:transmission-tower-import"
-                },
-                {
-                  "graph": "line",
-                  "type": "sensor",
-                  "entity": "sensor.export_power",
-                  "detail": 2,
-                  "name": "Einspeisung",
-                  "icon": "mdi:transmission-tower-export"
-                },
-                {
-                  "type": "gauge",
-                  "entity": "sensor.battery_level",
-                  "name": "Batterie",
-                  "min": 0,
-                  "max": 100,
-                  "severity": {
-                    "green": 70,
-                    "yellow": 40,
-                    "red": 20
-                  },
-                  "layout_options": {
-                    "grid_columns": 2,
-                    "grid_rows": 2
-                  }
-                }
+                {"graph": "line", "type": "sensor", "entity": "sensor.total_dc_power", "detail": 2, "name": "PV Erzeugung", "icon": "mdi:solar-power-variant"},
+                {"graph": "line", "type": "sensor", "entity": "sensor.load_power", "detail": 2, "name": "Hausverbrauch", "icon": "mdi:home"},
+                {"graph": "line", "type": "sensor", "entity": "sensor.battery_power", "detail": 2, "name": "Batterie", "icon": "mdi:battery-charging"},
+                {"graph": "line", "type": "sensor", "entity": "sensor.import_power", "detail": 2, "name": "Netzbezug", "icon": "mdi:transmission-tower-import"},
+                {"graph": "line", "type": "sensor", "entity": "sensor.export_power", "detail": 2, "name": "Einspeisung", "icon": "mdi:transmission-tower-export"}
               ]
+            },
+            {
+              "type": "gauge",
+              "entity": "sensor.battery_level",
+              "name": "Batterie",
+              "min": 0,
+              "max": 100,
+              "severity": {"green": 70, "yellow": 40, "red": 20}
             }
           ]
         }
