@@ -197,6 +197,18 @@ template:
             state_attr('climate.heizung_sauna_r', 'current_temperature')
           ] | reject('none') | list %}
           {{ (temps | sum / temps | count) | round(1) if temps else 'unavailable' }}
+      # Hausverbrauch ohne Batterieladung für Power-Flow-Card
+      - name: "Hausverbrauch Netto"
+        unique_id: hausverbrauch_netto
+        unit_of_measurement: "W"
+        device_class: power
+        state: >
+          {% set pv = states('sensor.total_dc_power') | float(0) %}
+          {% set import_p = states('sensor.import_power') | float(0) %}
+          {% set export_p = states('sensor.export_power') | float(0) %}
+          {% set battery = states('sensor.battery_power') | float(0) %}
+          {% set battery_charge = [0, -battery] | max %}
+          {{ (pv + import_p - export_p - battery_charge) | round(0) }}
 
 # Energie-Sensoren für Zigbee Steckdosen (berechnet aus Leistung)
 sensor:
@@ -214,3 +226,4 @@ sensor:
     unit_prefix: k
     unit_time: h
     method: left
+      # Hausverbrauch ohne Batterieladung für Power-Flow-Card
