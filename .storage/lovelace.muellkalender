@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.muellkalender",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "path": "default_view",
+          "title": "Müllkalender",
+          "type": "masonry",
+          "cards": [
+            {
+              "type": "custom:trash-card",
+              "entities": [
+                "calendar.abfallwirtschaftsbetrieb_lk_mainz_bingen"
+              ],
+              "layout": "vertical",
+              "next_days": 60,
+              "day_style": "default",
+              "card_style": "card",
+              "color_mode": "background",
+              "filter_events": true,
+              "drop_todayevents_from": "10:00:00",
+              "pattern": [
+                {
+                  "label": "Biomüll",
+                  "icon": "mdi:leaf",
+                  "color": "brown",
+                  "pattern": "Bio",
+                  "type": "organic"
+                },
+                {
+                  "label": "Gelber Sack",
+                  "icon": "mdi:recycle",
+                  "color": "amber",
+                  "pattern": "Gelb",
+                  "type": "recycle"
+                },
+                {
+                  "label": "Papier",
+                  "icon": "mdi:newspaper-variant-multiple-outline",
+                  "color": "indigo",
+                  "pattern": "Papier",
+                  "type": "paper"
+                },
+                {
+                  "label": "Restmüll",
+                  "icon": "mdi:trash-can",
+                  "color": "grey",
+                  "pattern": "Restm",
+                  "type": "waste"
+                },
+                {
+                  "label": "Problemmüll",
+                  "icon": "mdi:alert-circle",
+                  "color": "red",
+                  "pattern": "Problem",
+                  "type": "others"
+                }
+              ]
+            },
+            {
+              "type": "calendar",
+              "entities": [
+                "calendar.abfallwirtschaftsbetrieb_lk_mainz_bingen"
+              ],
+              "initial_view": "listWeek"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

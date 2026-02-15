@@ -11,6 +11,16 @@
           "type": "masonry",
           "cards": [
             {
+              "type": "custom:clock-weather-card",
+              "entity": "weather.forecast_home",
+              "forecast_rows": 5,
+              "locale": "de-DE",
+              "time_format": "24",
+              "date_pattern": "cccc, dd. MMMM yyyy",
+              "hide_today_section": false,
+              "hide_forecast_section": false
+            },
+            {
               "type": "horizontal-stack",
               "cards": [
                 {
@@ -135,6 +145,47 @@
                       }
                     ]
                   }
+                },
+                {
+                  "type": "custom:button-card",
+                  "icon": "mdi:trash-can",
+                  "name": "Müll",
+                  "show_state": false,
+                  "show_name": true,
+                  "show_icon": true,
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/muellkalender/0"
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "background": "var(--card-background-color)"
+                      },
+                      {
+                        "padding": "12px"
+                      },
+                      {
+                        "border-radius": "12px"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "width": "24px"
+                      },
+                      {
+                        "color": "var(--primary-color)"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-size": "12px"
+                      },
+                      {
+                        "margin-top": "4px"
+                      }
+                    ]
+                  }
                 }
               ],
               "card_mod": {
@@ -156,8 +207,8 @@
                       "type": "custom:button-card",
                       "entity": "light.buro_leds",
                       "icon": "mdi:lightbulb-group",
-                      "name": "B\u00fcro LEDs",
-                      "label": "TV \u00b7 Schreibtisch \u00b7 Wand \u00b7 Regal",
+                      "name": "Büro LEDs",
+                      "label": "TV · Schreibtisch · Wand · Regal",
                       "show_label": true,
                       "show_state": false,
                       "tap_action": {
@@ -1726,7 +1777,7 @@
                       "type": "custom:button-card",
                       "entity": "binary_sensor.hoftor",
                       "icon": "mdi:door",
-                      "name": "T\u00fcr",
+                      "name": "Tür",
                       "show_state": false,
                       "tap_action": {
                         "action": "more-info"
@@ -1812,7 +1863,7 @@
                       "type": "custom:button-card",
                       "entity": "lock.hoftor",
                       "icon": "mdi:door-open",
-                      "name": "\u00d6ffnen",
+                      "name": "Öffnen",
                       "show_state": false,
                       "tap_action": {
                         "action": "call-service",
@@ -1822,7 +1873,7 @@
                         }
                       },
                       "confirmation": {
-                        "text": "Tor \u00f6ffnen?"
+                        "text": "Tor öffnen?"
                       },
                       "styles": {
                         "card": [

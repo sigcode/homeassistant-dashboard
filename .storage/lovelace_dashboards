@@ -30,6 +30,15 @@
         "show_in_sidebar": true,
         "require_admin": false,
         "mode": "storage"
+      },
+      {
+        "id": "muellkalender",
+        "icon": "mdi:trash-can",
+        "title": "Müllkalender",
+        "url_path": "muellkalender",
+        "show_in_sidebar": true,
+        "require_admin": false,
+        "mode": "storage"
       }
     ]
   }
