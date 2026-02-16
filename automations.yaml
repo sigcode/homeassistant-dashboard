@@ -629,3 +629,44 @@
           - light.h6061
           - light.wled_3
           - light.wled_4
+
+# Flur Dimmer - Drehknopf
+- id: flur_dimmer_brightness_up
+  alias: "Flur Dimmer - Heller"
+  description: "Erhöht Helligkeit beim Rechtsdrehen"
+  trigger:
+    - platform: mqtt
+      topic: "zigbee2mqtt/Knopf Flur/action"
+      payload: "rotate_right"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.dimmer_flur
+      data:
+        brightness_step_pct: 10
+
+- id: flur_dimmer_brightness_down
+  alias: "Flur Dimmer - Dunkler"
+  description: "Verringert Helligkeit beim Linksdrehen"
+  trigger:
+    - platform: mqtt
+      topic: "zigbee2mqtt/Knopf Flur/action"
+      payload: "rotate_left"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.dimmer_flur
+      data:
+        brightness_step_pct: -10
+
+- id: flur_dimmer_toggle
+  alias: "Flur Dimmer - An/Aus"
+  description: "Schaltet Flur Licht beim Drücken"
+  trigger:
+    - platform: mqtt
+      topic: "zigbee2mqtt/Knopf Flur/action"
+      payload: "single"
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.dimmer_flur
